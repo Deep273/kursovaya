@@ -25,7 +25,7 @@ body {
 button {
     font-family: 'Ubuntu', sans-serif;
     color: white;
-    width: 250px;
+    width: 200px;
     height: 50px;
     background: none;
     border-radius: 20px;
@@ -1960,7 +1960,7 @@ footer>p,
     }
 
     .catalog-blocks__block:nth-of-type(3) {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/catalog-professional-makeup-artists.svg');
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/catalog-accessories.svg');
         background-size: cover;
         background-position: center;
     }
@@ -2001,4 +2001,589 @@ footer>p,
         display: none;
     }
 }
+
+
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 250px;
+    background: #171720;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 20px;
+    border-right: 1px solid #27273a;
+}
+
+.admin-logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+}
+.admin-logo span {
+    color: #6c63ff;
+}
+
+.admin-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.admin-menu a {
+    text-decoration: none;
+    color: #c7c7d1;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.admin-menu a.active,
+.admin-menu a:hover {
+    background: #2b2b3b;
+    color: #6fbaff;
+}
+
+/* Кнопка выхода */
+.admin-sidebar-footer {
+    text-align: center;
+}
+
+.admin-logout-btn {
+    width: 100%;
+    background: #2b6de0;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+.admin-logout-btn:hover {
+    background: #3f7eff;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 40px 50px;
+}
+
+.admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+.admin-topbar h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #e6e6e6;
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.admin-search {
+    background: #1c1c27;
+    border: 1px solid #2f2f45;
+    border-radius: 10px;
+    padding: 10px 15px;
+    color: white;
+    width: 250px;
+    transition: 0.3s;
+}
+.admin-search:focus {
+    border-color: #6c63ff;
+    outline: none;
+}
+
+.admin-add-btn {
+    background: #3f7eff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.admin-add-btn:hover {
+    background: #5a8fff;
+}
+
+.admin-table {
+    background: #181822;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2f2f45;
+}
+
+.admin-table-header,
+.admin-table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 15px 20px;
+    align-items: center;
+}
+
+.admin-table-header {
+    background: #2a2a3b;
+    color: #a3a3c9;
+    font-weight: 700;
+    border-bottom: 1px solid #32324a;
+}
+
+.admin-table-row {
+    border-bottom: 1px solid #2f2f45;
+    transition: 0.2s;
+}
+.admin-table-row:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.admin-edit-btn,
+.admin-delete-btn {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    color: white;
+}
+
+.admin-edit-btn {
+    background: #4f6cff;
+}
+.admin-edit-btn:hover {
+    background: #667fff;
+}
+
+.admin-delete-btn {
+    background: #37415a;
+}
+.admin-delete-btn:hover {
+    background: #46516d;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 25, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: #1c1c27;
+    padding: 30px 40px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 50, 0.4);
+    border: 1px solid #2a2a3b;
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: #e6e6e6;
+    margin-bottom: 25px;
+}
+
+.service-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.service-form label {
+    font-weight: 600;
+    color: #bdbde0;
+}
+
+.service-form input {
+    background: #11111a;
+    border: 1px solid #2f2f45;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: white;
+    transition: 0.3s;
+}
+
+.service-form input:focus {
+    border-color: #6c63ff;
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+
+.save-btn {
+    background: #3f7eff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+.save-btn:hover {
+    background: #5a8fff;
+}
+
+.cancel-btn {
+    background: #3a3a4f;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+.cancel-btn:hover {
+    background: #4a4a64;
+}
+
+.service-form select {
+    background: #11111a;
+    border: 1px solid #2f2f45;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: white;
+    cursor: pointer;
+}
+.service-form select:focus {
+    border-color: #6c63ff;
+    outline: none;
+}
+
+/* --- Модальное окно --- */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 15, 25, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.show { display: flex; }
+
+.modal-content {
+    background: #1c1c27;
+    padding: 40px 50px;
+    border-radius: 12px;
+    width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 50, 0.4);
+    border: 1px solid #2a2a3b;
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: #e6e6e6;
+    margin-bottom: 25px;
+}
+
+.catalog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.catalog-form label {
+    font-weight: 600;
+    color: #bdbde0;
+}
+
+.catalog-form input,
+.catalog-form textarea,
+.catalog-form select {
+    background: #11111a;
+    border: 1px solid #2f2f45;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: white;
+}
+
+.catalog-form textarea { resize: vertical; min-height: 80px; }
+
+.catalog-form input:focus,
+.catalog-form textarea:focus,
+.catalog-form select:focus {
+    border-color: #6c63ff;
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.save-btn {
+    background: #3f7eff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+.save-btn:hover { background: #5a8fff; }
+
+.cancel-btn {
+    background: #3a3a4f;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+.cancel-btn:hover { background: #4a4a64; }
+
+/* --- Таблица --- */
+.admin-table-header,
+.admin-table-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    padding: 10px 15px;
+    align-items: center;
+}
+
+.admin-table-header { font-weight: 700; border-bottom: 1px solid #2a2a3b; }
+.admin-table-row { border-bottom: 1px solid #2a2a3b; }
+.admin-actions button { margin-right: 10px; }
+
+
+.catalog-page {
+    padding: 40px 0;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: #1c1c27;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(80,80,255,0.4);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    color: #e6e6e6;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    color: #8a8aff;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.btn {
+    background: #3f7eff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #5a8fff;
+}
+
+
+.service-form { display: flex; flex-direction: column; gap: 15px; }
+.service-form label { font-weight: 600; color: #bdbde0; }
+.service-form input, .service-form select {
+    background: #11111a;
+    border: 1px solid #2f2f45;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: white;
+}
+
+/* Карточки товаров */
+.product-card {
+    background: #1c1c27;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(80,80,255,0.4);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    color: #e6e6e6;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    color: #8a8aff;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Кнопки */
+.btn {
+    background: #3f7eff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #5a8fff;
+}
+
+/* Форма каталога (аналогично service-form) */
+.catalog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.catalog-form label {
+    font-weight: 600;
+    color: #bdbde0;
+}
+
+.catalog-form input,
+.catalog-form select,
+.catalog-form textarea {
+    background: #11111a;
+    border: 1px solid #2f2f45;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: white;
+    font-size: 14px;
+}
+
+.catalog-form input:focus,
+.catalog-form select:focus,
+.catalog-form textarea:focus {
+    outline: none;
+    border-color: #3f7eff;
+    box-shadow: 0 0 5px rgba(63,126,255,0.5);
+}
+
+/* Кнопки формы */
+.catalog-form .save-btn,
+.catalog-form .cancel-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.catalog-form .save-btn {
+    background-color: #3f7eff;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.catalog-form .save-btn:hover {
+    background-color: #5a8fff;
+}
+
+.catalog-form .cancel-btn {
+    background-color: #2f2f45;
+    color: #fff;
+}
+
+.catalog-form .cancel-btn:hover {
+    background-color: #444877;
+}
+
+/* Кнопки внутри формы выравнивание */
+.catalog-form .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+
+
+
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог</title>
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
@@ -24,7 +24,16 @@
             <img src="img/logo.png" alt="logo" class="logo">
         </a>
         <p>+7 952 884-26-95</p>
-        <a href="auth.html"><button class="u-bold">Войти</button></a>
+        @if(Auth::check())
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="u-bold" type="submit">Выйти</button>
+            </form>
+        @else
+            <a href="{{ route('auth') }}">
+                <button class="u-bold">Войти</button>
+            </a>
+        @endif
         <!-- Бургер-меню -->
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="burger-menu f-d_c">
@@ -61,7 +70,7 @@
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">01</p>
             <div class="catalog-blocks__block-content">
-                <h3>Мужская одежда, обувь и аксессуары</h3>
+                <h3>Мужская одежда</h3>
                 <p>ЭЛЕГАНТНОСТЬ — именно это слово олицетворяет нашу новую коллекцию! Строгость, утонченность,
                     уверенность и стиль — каждый элемент создан для того, чтобы подчеркнуть индивидуальность
                     мужчины.</p>
@@ -72,7 +81,7 @@
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">02</p>
             <div class="catalog-blocks__block-content">
-                <h3>Свадебные платья и аксессуары</h3>
+                <h3>Свадебные платья</h3>
                 <p>РОСКОШНОЕ именно с этим словом ассоциируются платья нашей новой линии... Изящество, легкость,
                     красота и стиль! Тот момент, когда все сложилось идеально!</p>
                 <a href="#"><button>Подробнее</button></a>
@@ -82,21 +91,22 @@
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">03</p>
             <div class="catalog-blocks__block-content">
-                <h3>Профессиональные Стилисты и Визажисты</h3>
-                <p>Загадочный персонал, который создаст неповторимый образ для вашей готической свадьбы. </p>
+                <h3>Аксессуары</h3>
+                <p>Аксессуары в готическом стиле — это уникальные детали, которые придадут вашему
+                    образу таинственность и элегантную мрачность.</p>
                 <a href="#"><button>Подробнее</button></a>
             </div>
-            <img src="img/catalog-professional-makeup-artists.svg" alt="catalog-professional-makeup-artists">
+            <img src="img/catalog-accessories.svg" alt="catalog-accessories">
         </div>
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">04</p>
             <div class="catalog-blocks__block-content">
-                <h3>Индивидуальный пошив</h3>
-                <p>Каждый наряд разрабатывается с учетом ваших желаний и особенностей фигуры, чтобы подчеркнуть вашу
-                    уникальность и сделать этот день поистине незабываемым. </p>
+                <h3>Украшения и декор</h3>
+                <p>Каждое украшение и элемент декора создаются с учётом вашей индивидуальности и стилистики готической свадьбы, чтобы
+                    подчеркнуть неповторимость вашего образа и добавить особую атмосферу таинственности и изящества этому важному дню.</p>
                 <a href="#"><button>Подробнее</button></a>
             </div>
-            <img src="img/catalog-individual-tailoring.svg" alt="catalog-individual-tailoring">
+            <img src="img/catalog-decorations-and-decor.svg" alt="catalog-decorations-and-decor">
         </div>
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">05</p>

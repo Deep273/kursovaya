@@ -11,7 +11,7 @@ class CreateWeddingProjectTable extends Migration
         Schema::create('wedding_project', function (Blueprint $table) {
             $table->id('wedding_project_id');
             $table->timestamp('date')->unique();
-            $table->decimal('price', 5, 2);
+            $table->decimal('price', 10, 2);
             $table->unsignedBigInteger('fk_user_id');
             $table->foreign('fk_user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthController extends Controller
 {
     // Форма входа
@@ -27,6 +28,15 @@ class AuthController extends Controller
 
         if (Auth::attempt([$fieldType => $request->contact, 'password' => $request->password], $request->remember)) {
             $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            // 🔹 Проверяем роль и перенаправляем
+            if ($user->role === 'admin') {
+                return redirect()->route('admin_services');
+            }
+
+            // 🔹 Если обычный пользователь
             return redirect()->route('main');
         }
 

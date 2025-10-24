@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AuthController;
-
+use App\Http\Controllers\AdminCatalogController;
+use App\Http\Controllers\AdminServiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,4 +48,24 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', function () {
     return view('site.register');
 })->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+Route::post('/register', [RegisterController::class, 'register'])
+    ->name('register.submit');
+
+Route::get('/mens-clothing', function () {
+    return view('site.mens_clothing');
+})->name('mens_clothing');
+
+Route::group(['prefix' => 'adminpanel'], function () {
+    Route::get('/catalog', [AdminCatalogController::class, 'index'])->name('admin_catalog');
+    Route::post('/catalog', [AdminCatalogController::class, 'store'])->name('catalog.store');
+    Route::put('/catalog/{id}', [AdminCatalogController::class, 'update'])->name('catalog.update');
+    Route::delete('/catalog/{id}', [AdminCatalogController::class, 'destroy'])->name('catalog.destroy');
+});
+
+Route::prefix('adminpanel')->group(function () {
+    Route::get('/services', [AdminServiceController::class, 'index'])->name('admin_services');
+    Route::post('/services/store', [AdminServiceController::class, 'store'])->name('services.store');
+    Route::put('/services/{id}', [AdminServiceController::class, 'update'])->name('services.update');
+    Route::delete('/services/{id}', [AdminServiceController::class, 'destroy'])->name('services.destroy');
+});
+

@@ -19,7 +19,7 @@ class CreateProductCatalogTable extends Migration
                 'Украшения и декор',
                 'Свадебные кольца'
             ]);
-            $table->decimal('price', 5, 2);
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }
