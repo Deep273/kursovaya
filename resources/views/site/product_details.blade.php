@@ -2,14 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мужская одежда</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Куртка демисезонная</title>
+    <link rel="stylesheet" href="{{ asset('css/productdetails.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mens_clothing.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
 <header class="d-f f-d_c">
     <div class="header-top d-f s-b a-i_c">
         <div class="block-social d-f">
@@ -21,23 +20,17 @@
         <a href="{{ route('main') }}">
             <img src="img/logo.png" alt="logo" class="logo">
         </a>
-
         <p>+7 952 884-26-95</p>
-
-        {{-- Проверка авторизации --}}
         @if(Auth::check())
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
-                <button class="u-bold auth-btn" type="submit">Выйти</button>
+                <button class="u-bold" type="submit">Выйти</button>
             </form>
         @else
             <a href="{{ route('auth') }}">
-                <button class="u-bold auth-btn">Войти</button>
+                <button class="u-bold">Войти</button>
             </a>
         @endif
-
-
-
         <!-- Бургер-меню -->
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="burger-menu f-d_c">
@@ -68,30 +61,22 @@
         <a href="#">Контакты</a>
     </div>
 </header>
-
-<main class="catalog-page container">
-    <h2 class="page-title">Мужская одежда</h2>
-
-    <div class="product-grid">
-        @forelse($products as $product)
-            <div class="product-card">
-                <button class="btn cart-icon-btn" aria-label="Добавить в корзину">
-                    <img src="{{ asset('img/cart-icon.svg') }}" alt="Иконка корзины" width="30" height="30">
-                </button>
-
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                <h3>{{ $product->name }}</h3>
-                <p class="price">{{ number_format($product->price, 0, ',', ' ') }} ₽</p>
-
-                <a href="{{ route('product_details.index', $product->product_catalog_id) }}" class="btn more-btn">Подробнее</a>
-
-            </div>
-        @empty
-            <p>Товары в этой категории пока отсутствуют.</p>
-        @endforelse
+<div class="product-detail-container">
+    <div class="product-image-block">
+        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image-big">
     </div>
-
-</main>
+    <div class="product-detail-info">
+        <h1 class="product-title">{{ $product->name }}</h1>
+        <p class="product-desc">{{ $product->description }}</p>
+        <div class="product-price">{{ number_format($product->price, 0, ',', ' ') }} ₽</div>
+        <div class="product-buttons">
+            <button class="add-cart-btn">Добавить в корзину</button>
+            <button class="cart-icon-btn" aria-label="В корзину">
+                <img src="{{ asset('img/cart-icon.svg') }}" alt="В корзину">
+            </button>
+        </div>
+    </div>
+</div>
 
 <footer>
     <div class="footer-top container d-f s-b a-i_c">
@@ -121,6 +106,5 @@
         <p class="u-bold">tebe_chego@inbox.ru</p>
     </div>
 </footer>
-
 </body>
 </html>

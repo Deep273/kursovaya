@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель — Каталог</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-base.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="admin-wrapper">
 
-    <!-- Боковое меню -->
     <aside class="admin-sidebar">
         <div>
             <h2 class="admin-logo">Admin<span>Panel</span></h2>
@@ -24,20 +23,16 @@
         <div class="admin-sidebar-footer">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="admin-logout-btn">Выйти</button>
+                <button type="submit" class="admin-logout-btn btn">Выйти</button>
             </form>
         </div>
     </aside>
 
-    <!-- Контент -->
     <main class="admin-content">
         <header class="admin-topbar">
             <h1>Управление каталогом</h1>
-
-            <!-- Форма поиска -->
             <form method="GET" action="{{ route('admin_catalog') }}" class="admin-header-actions">
                 <input type="text" name="search" class="admin-search" placeholder="Поиск по названию..." value="{{ request('search') }}">
-
                 <select name="category" class="admin-search">
                     <option value="">Все категории</option>
                     <option value="Мужская одежда" {{ request('category') == 'Мужская одежда' ? 'selected' : '' }}>Мужская одежда</option>
@@ -46,13 +41,11 @@
                     <option value="Украшения и декор" {{ request('category') == 'Украшения и декор' ? 'selected' : '' }}>Украшения и декор</option>
                     <option value="Свадебные кольца" {{ request('category') == 'Свадебные кольца' ? 'selected' : '' }}>Свадебные кольца</option>
                 </select>
-
-                <button type="submit" class="admin-add-btn">Найти</button>
-                <button type="button" class="admin-add-btn" id="openAddModalBtn">Добавить товар</button>
+                <button type="submit" class="admin-add-btn btn">Найти</button>
+                <button type="button" class="admin-add-btn btn" id="openAddModalBtn">Добавить товар</button>
             </form>
         </header>
 
-        <!-- Таблица каталога -->
         <section class="admin-table">
             <div class="admin-table-header">
                 <span>Имя</span>
@@ -69,7 +62,7 @@
                     <span>{{ $product->category }}</span>
                     <span>{{ number_format($product->price, 0, ',', ' ') }} ₽</span>
                     <div class="admin-actions">
-                        <button class="admin-edit-btn"
+                        <button class="admin-edit-btn btn"
                                 data-id="{{ $product->product_catalog_id }}"
                                 data-name="{{ $product->name }}"
                                 data-description="{{ $product->description }}"
@@ -78,23 +71,21 @@
                                 data-route="{{ route('catalog.update', $product->product_catalog_id) }}">
                             Редактировать
                         </button>
-
-                        <form method="POST" action="{{ route('catalog.destroy', $product->product_catalog_id) }}" style="display:inline-block;" onsubmit="return confirm('Вы уверены, что хотите удалить этот товар?');">
+                        <form method="POST" action="{{ route('catalog.destroy', $product->product_catalog_id) }}" onsubmit="return confirm('Вы уверены, что хотите удалить этот товар?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="admin-delete-btn">Удалить</button>
+                            <button type="submit" class="admin-delete-btn btn">Удалить</button>
                         </form>
                     </div>
                 </div>
             @empty
-                <p style="padding: 15px;">Товары не найдены.</p>
+                <p style="padding: 15px; color:white;">Товары не найдены.</p>
             @endforelse
-
         </section>
     </main>
 </div>
 
-<!-- Модальное окно добавления -->
+<!-- Модалка добавления -->
 <div class="modal" id="addCatalogModal">
     <div class="modal-content">
         <h2>Добавить товар</h2>
@@ -102,10 +93,8 @@
             @csrf
             <label>Имя</label>
             <input type="text" name="name" placeholder="Введите имя" required>
-
             <label>Описание</label>
             <textarea name="description" placeholder="Введите описание" required></textarea>
-
             <label>Категория</label>
             <select name="category" required>
                 <option value="" disabled selected>Выберите категорию</option>
@@ -115,19 +104,17 @@
                 <option value="Украшения и декор">Украшения и декор</option>
                 <option value="Свадебные кольца">Свадебные кольца</option>
             </select>
-
             <label>Цена</label>
             <input type="number" name="price" placeholder="Введите цену, ₽" required min="0">
-
             <div class="form-buttons">
-                <button type="submit" class="save-btn">Сохранить</button>
-                <button type="button" class="cancel-btn" id="closeAddModalBtn">Отмена</button>
+                <button type="submit" class="save-btn btn">Сохранить</button>
+                <button type="button" class="cancel-btn btn" id="closeAddModalBtn">Отмена</button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Модальное окно редактирования -->
+<!-- Модалка редактирования -->
 <div class="modal" id="editCatalogModal">
     <div class="modal-content">
         <h2>Редактировать товар</h2>
@@ -135,13 +122,10 @@
             @csrf
             @method('PUT')
             <input type="hidden" name="product_catalog_id" id="edit_product_catalog_id">
-
             <label>Имя</label>
             <input type="text" name="name" id="edit_name" placeholder="Введите имя" required>
-
             <label>Описание</label>
             <textarea name="description" id="edit_description" placeholder="Введите описание" required></textarea>
-
             <label>Категория</label>
             <select name="category" id="edit_category" required>
                 <option value="" disabled>Выберите категорию</option>
@@ -151,18 +135,15 @@
                 <option value="Украшения и декор">Украшения и декор</option>
                 <option value="Свадебные кольца">Свадебные кольца</option>
             </select>
-
             <label>Цена</label>
             <input type="number" name="price" id="edit_price" placeholder="Введите цену, ₽" required min="0">
-
             <div class="form-buttons">
-                <button type="submit" class="save-btn">Сохранить</button>
-                <button type="button" class="cancel-btn" id="closeEditModalBtn">Отмена</button>
+                <button type="submit" class="save-btn btn">Сохранить</button>
+                <button type="button" class="cancel-btn btn" id="closeEditModalBtn">Отмена</button>
             </div>
         </form>
     </div>
 </div>
-
 
 <script>
     // Модалка добавления
@@ -173,7 +154,6 @@
     closeAddBtn.addEventListener('click', () => addModal.classList.remove('show'));
     window.addEventListener('click', e => { if (e.target === addModal) addModal.classList.remove('show'); });
 
-    // Модалка редактирования
     // Модалка редактирования
     const editModal = document.getElementById('editCatalogModal');
     const editForm = document.getElementById('editCatalogForm');
@@ -194,6 +174,5 @@
     closeEditBtn.addEventListener('click', () => editModal.classList.remove('show'));
     window.addEventListener('click', e => { if (e.target === editModal) editModal.classList.remove('show'); });
 </script>
-
 </body>
 </html>

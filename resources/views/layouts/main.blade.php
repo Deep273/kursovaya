@@ -26,19 +26,21 @@
 
         <p>+7 952 884-26-95</p>
 
-        {{-- Проверка авторизации --}}
-        @if(Auth::check())
-            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                @csrf
-                <button class="u-bold auth-btn" type="submit">Выйти</button>
-            </form>
-        @else
-            <a href="{{ route('auth') }}">
-                <button class="u-bold auth-btn">Войти</button>
-            </a>
-        @endif
-
-
+        <div class="user-dropdown">
+            <button class="auth-btn">Меню</button>
+            <div class="user-menu">
+                @if(Auth::check())
+                    <a href="{{ route('account') }}">Личный кабинет</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="logout-btn">Выйти</button>
+                    </form>
+                @else
+                    <a href="{{ route('auth') }}">Войти</a>
+                    <a href="{{ route('register') }}">Зарегистрироваться</a>
+                @endif
+            </div>
+        </div>
 
         <!-- Бургер-меню -->
         <input type="checkbox" id="menu-toggle" />

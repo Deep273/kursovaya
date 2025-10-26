@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    background-color: black;
+}
+
+.u-regular {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.u-bold {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    cursor: pointer;
+}
+
+button {
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    width: 200px;
+    height: 50px;
+    background: none;
+    border-radius: 20px;
+    border-width: 12px;
+    border: 1px solid #009CDF;
+    font-size: 18px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 32px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.d-f {
+    display: flex;
+}
+
+.s-b {
+    justify-content: space-between
+}
+
+.a-i_c {
+    align-items: center;
+}
+
+.f-d_c {
+    flex-direction: column;
+}
+
+.j-c_c {
+    justify-content: center;
+}
+
+.f-w {
+    flex-wrap: wrap;
+}
+
+.auth {
+    border: 1px solid white;
+    max-width: 556px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.close-button {
+    margin: 20px 20px 13px 0;
+    justify-content: flex-end;
+}
+
+.auth-block>p {
+    font-size: 24px;
+    margin: 0 53px;
+    font-weight: 700;
+}
+
+.auth-block>form {
+    margin: 50px 53px 23px 53px;
+    gap: 26px;
+}
+
+.auth-block>form>input {
+    padding-left: 19px;
+}
+
+.auth-block>form>input {
+    font-size: 16px;
+    width: 450px;
+    height: 55px;
+    border: none;
+}
+
+.auth-block>form>button {
+    width: 450px;
+    height: 55px;
+    border: none;
+    background: linear-gradient(to bottom, #009CDF 0%, #09003E 100%);
+    border-radius: 0;
+}
+
+.remember {
+    gap: 1em;
+}
+
+.remember>input {
+    width: 26px;
+    height: 24px;
+}
+
+.remember-and-forgot {
+    margin: 0 53px;
+}
+
+.down-button {
+    gap: 1em;
+    margin: 98px 0 32px 0;
+}
+
+.success-message {
+    background-color: #f3e6ff;
+    border: 1px solid #9b59b6;
+    color: #6c3483;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 15px 53px;
+    text-align: center;
+    font-weight: 500;
+}

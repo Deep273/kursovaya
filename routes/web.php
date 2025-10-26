@@ -5,6 +5,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AdminCatalogController;
 use App\Http\Controllers\AdminServiceController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProductDetailsController;
+use App\Http\Controllers\CatalogController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,9 +56,8 @@ Route::get('/register', function () {
 Route::post('/register', [RegisterController::class, 'register'])
     ->name('register.submit');
 
-Route::get('/mens-clothing', function () {
-    return view('site.mens_clothing');
-})->name('mens_clothing');
+Route::get('/catalog/mens', [CatalogController::class, 'mens'])->name('mens_clothing.mens');
+Route::get('/product/{id}', [ProductDetailsController::class, 'index'])->name('product_details.index');
 
 Route::group(['prefix' => 'adminpanel'], function () {
     Route::get('/catalog', [AdminCatalogController::class, 'index'])->name('admin_catalog');
@@ -69,3 +73,16 @@ Route::prefix('adminpanel')->group(function () {
     Route::delete('/services/{id}', [AdminServiceController::class, 'destroy'])->name('services.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    // Главная страница личного кабинета
+    Route::get('/account', [AccountController::class, 'index'])->name('account');
+    // Редактирование профиля
+    Route::get('/account/profile', [AccountController::class, 'profile'])->name('account.profile');
+    Route::post('/account/profile', [AccountController::class, 'updateProfile'])->name('account.profile.update');
+    // Заказы
+    Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders');
+    // Настройки
+    Route::get('/account/settings', [AccountController::class, 'settings'])->name('account.settings');
+});
+
+   // Route::get('/product_details/{id}', [ProductDetailsController::class, 'index'])->name('product_details.index');

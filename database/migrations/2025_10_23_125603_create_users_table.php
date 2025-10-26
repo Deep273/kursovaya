@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
             $table->string('number_phone', 12)->unique();
             $table->string('password', 255);
             $table->enum('role', ['admin', 'user']);
+            $table->text('avatar')->nullable();
             $table->timestamps();
         });
     }

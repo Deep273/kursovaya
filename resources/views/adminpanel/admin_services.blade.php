@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель — Услуги</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-base.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -23,7 +23,7 @@
         <div class="admin-sidebar-footer">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="admin-logout-btn">Выйти</button>
+                <button type="submit" class="admin-logout-btn btn">Выйти</button>
             </form>
         </div>
     </aside>
@@ -31,12 +31,9 @@
     <main class="admin-content">
         <header class="admin-topbar">
             <h1>Управление услугами</h1>
-
             <div class="admin-header-actions">
-                <!-- Форма поиска -->
                 <form method="GET" action="{{ route('admin_services') }}" class="search-form">
                     <input type="text" name="search" class="admin-search" placeholder="Поиск по названию..." value="{{ request('search') }}">
-
                     <select name="category" class="admin-search">
                         <option value="">Все категории</option>
                         <option value="Кейтеринг" {{ request('category') == 'Кейтеринг' ? 'selected' : '' }}>Кейтеринг</option>
@@ -45,12 +42,9 @@
                         <option value="Организация" {{ request('category') == 'Организация' ? 'selected' : '' }}>Организация</option>
                         <option value="Фотограф и фотозоны" {{ request('category') == 'Фотограф и фотозоны' ? 'selected' : '' }}>Фотограф и фотозоны</option>
                     </select>
-
-                    <button type="submit" class="admin-add-btn">Найти</button>
+                    <button type="submit" class="admin-add-btn btn">Найти</button>
                 </form>
-
-                <!-- Кнопка добавления услуги -->
-                <button type="button" class="admin-add-btn" id="openAddModalBtn">Добавить услугу</button>
+                <button type="button" class="admin-add-btn btn" id="openAddModalBtn">Добавить услугу</button>
             </div>
         </header>
 
@@ -68,7 +62,7 @@
                     <span>{{ $service->category }}</span>
                     <span>{{ number_format($service->price, 0, ',', ' ') }} ₽</span>
                     <div class="admin-actions">
-                        <button class="admin-edit-btn"
+                        <button class="admin-edit-btn btn"
                                 data-id="{{ $service->service_id }}"
                                 data-name="{{ $service->name }}"
                                 data-category="{{ $service->category }}"
@@ -76,13 +70,10 @@
                                 data-route="{{ route('services.update', $service->service_id) }}">
                             Редактировать
                         </button>
-
-
-                        <form method="POST" action="{{ route('services.destroy', $service->service_id) }}"
-                              onsubmit="return confirm('Удалить эту услугу?');">
+                        <form method="POST" action="{{ route('services.destroy', $service->service_id) }}" onsubmit="return confirm('Удалить эту услугу?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="admin-delete-btn">Удалить</button>
+                            <button type="submit" class="admin-delete-btn btn">Удалить</button>
                         </form>
                     </div>
                 </div>
@@ -99,7 +90,6 @@
             @csrf
             <label>Название услуги</label>
             <input type="text" name="name" placeholder="Введите название" required>
-
             <label>Категория</label>
             <select name="category" required>
                 <option value="" disabled selected>Выберите категорию</option>
@@ -109,10 +99,8 @@
                 <option value="Организация">Организация</option>
                 <option value="Фотограф и фотозоны">Фотограф и фотозоны</option>
             </select>
-
             <label>Цена</label>
             <input type="number" name="price" placeholder="Введите цену, ₽" required min="0">
-
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
                 <button type="button" class="cancel-btn btn" id="closeAddModalBtn">Отмена</button>
@@ -129,10 +117,8 @@
             @csrf
             @method('PUT')
             <input type="hidden" name="service_id" id="edit_service_id">
-
             <label>Название услуги</label>
             <input type="text" name="name" id="edit_name" placeholder="Введите название" required>
-
             <label>Категория</label>
             <select name="category" id="edit_category" required>
                 <option value="" disabled>Выберите категорию</option>
@@ -142,10 +128,8 @@
                 <option value="Организация">Организация</option>
                 <option value="Фотограф и фотозоны">Фотограф и фотозоны</option>
             </select>
-
             <label>Цена</label>
             <input type="number" name="price" id="edit_price" placeholder="Введите цену, ₽" required min="0">
-
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
                 <button type="button" class="cancel-btn btn" id="closeEditFormBtn">Отмена</button>
@@ -179,7 +163,6 @@
             editModal.classList.add('show');
         });
     });
-
 
     closeEditBtn.addEventListener('click', () => editModal.classList.remove('show'));
     window.addEventListener('click', e => { if (e.target === editModal) editModal.classList.remove('show'); });

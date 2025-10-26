@@ -1,0 +1,1024 @@
+@media (max-width: 1650px) {
+    .container {
+        padding: 0 calc((100% - 1200px) / 2);
+    }
+
+    header {
+        padding: 0 calc((100% - 1000px) / 2);
+    }
+
+    .about-us__blocks {
+        justify-content: space-around;
+    }
+
+    .wedding-planning-inside {
+        height: 459px;
+    }
+
+    .wedding-planning-inside__container {
+        padding: 50px 0px 0px 95px;
+    }
+
+    .wedding-planning-outside {
+        top: -36px;
+    }
+
+    .wedding-planning-outside__block {
+        width: 300px;
+        height: 120px;
+    }
+
+    .wedding-planning-outside__block>img {
+        margin: 15px 0 5px 0;
+    }
+
+    .indispensable-border {
+        margin: 0 calc((100% - 1000px) / 2);
+    }
+
+    .services-blocks {
+        padding: 0 calc((100% - 890px) / 2);
+        padding-bottom: 280px;
+    }
+
+    .services-block {
+        grid-template-columns: 38% 62%;
+    }
+
+    .services-blocks>.services-block:not(:last-child) {
+        width: 338px;
+        height: 228px;
+    }
+
+    .services-blocks>.services-block:last-child {
+        grid-template-columns: 28% 72%;
+    }
+
+    .care-border {
+        margin: 0 calc((100% - 1200px) / 2);
+    }
+
+    .care__right-content {
+        position: static;
+    }
+
+    .care__right-content h1 {
+        margin-top: 20px;
+    }
+
+    .care__right-content button {
+        margin-top: 25px;
+    }
+
+    .care__left-hint {
+        width: 460px;
+    }
+
+    .portfolio-block__photos,
+    .portfolio-block__photos>div,
+    .portfolio-block__photos>div>div {
+        gap: 15px;
+    }
+
+    .portfolio-block__photos>div>div:nth-child(2)>div img {
+        height: 199px;
+    }
+
+    .portfolio-block__photos>div>div:nth-child(1)>div img {
+        height: 223px;
+    }
+
+    .portfolio-block__photos>div:first-child img:first-of-type {
+        height: 436px;
+    }
+
+    .review {
+        padding: 0 calc((100% - 1200px) / 2) 136px calc((100% - 1200px) / 2);
+        gap: 75px;
+    }
+
+    .reviews-left-background {
+        width: 300px;
+    }
+
+    .reviews-left-border-background {
+        width: 400px;
+    }
+
+    .review-text p:last-of-type {
+        margin-top: 54px;
+    }
+
+    .reviews>.review:nth-of-type(4)>.review-text>p:last-of-type {
+        margin-top: 222px;
+    }
+
+    .reviews>.review:nth-of-type(5)>.review-text>p:last-of-type {
+        margin-top: 152px;
+    }
+
+    .catalog-blocks__block {
+        grid-template-columns: repeat(14, 1fr);
+    }
+
+    .catalog-blocks__block>p {
+        grid-column: 2/4;
+    }
+
+    .catalog-blocks__block-content {
+        grid-column: 4/9;
+    }
+
+    .catalog-blocks__block>img {
+        grid-column: 10 / 13;
+    }
+}
+
+@media (max-width: 1260px) {
+    header {
+        padding: 0 calc((100% - 700px) / 2);
+    }
+
+    .container {
+        padding: 0 calc((100% - 890px) / 2);
+    }
+
+    .wedding-planning-inside__container {
+        padding: 10px 0px 0px 30px;
+    }
+
+    .wedding-planning-inside__container>p {
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    .wedding-planning-buttons {
+        gap: 30px;
+    }
+
+    .wedding-planning-outside__block {
+        width: 250px;
+    }
+
+    .wedding-planning-inside {
+        height: 340px;
+    }
+
+    .wedding-planning-outside {
+        top: -16px;
+    }
+
+    .feedback-form>form {
+        max-width: 891px;
+    }
+
+    .feedback-form>h1 {
+        max-width: 891px;
+    }
+
+    .feedback-form>form>button {
+        margin-left: 0;
+    }
+
+    .indispensable-border {
+        margin: 0 calc((100% - 870px) / 2);
+    }
+
+    .footer-links {
+        gap: 20px;
+    }
+
+    .care-border {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 calc((100% - 800px) / 2);
+        gap: 134px;
+    }
+
+    .care__left-hint {
+        top: -700px;
+    }
+
+    .portfolio-block__photos {
+        gap: 26px;
+    }
+
+    .portfolio-block__photos>div {
+        gap: 11px;
+    }
+
+    .portfolio-block__photos>div>div {
+        gap: 26px;
+    }
+
+    .portfolio-block__photos>div>div:nth-child(2)>div img {
+        height: 143px;
+    }
+
+    .portfolio-block__photos>div>div:nth-child(1)>div img {
+        height: 161px;
+    }
+
+    .portfolio-block__photos>div:first-child img:first-of-type {
+        height: 313px;
+    }
+
+    .review {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .reviews-left-background {
+        width: 15%;
+    }
+
+    .reviews-left-border-background {
+        width: 434px;
+        height: 3120px;
+        top: 70px;
+        z-index: 0;
+    }
+
+    .reviews-gray-left-border-background {
+        border-right: 4px solid #1E1E1E;
+        position: absolute;
+        left: -5px;
+        width: 436px;
+        height: 2900px;
+        top: 170px;
+        z-index: 1;
+    }
+
+    .review {
+        gap: 100px;
+        background: none;
+        position: relative;
+        z-index: 2;
+    }
+
+    .reviews>.review:nth-child(4) {
+        padding-top: 123px;
+    }
+
+    .review-text {
+        background: url('../img/background-review-small.svg');
+        background-repeat: no-repeat;
+        background-size: 85%;
+        background-position: center left;
+    }
+
+    .review-text p {
+        margin-top: 51px;
+    }
+
+    .review-text p:last-of-type,
+    .reviews>.review:nth-of-type(5)>.review-text>p:last-of-type,
+    .reviews>.review:nth-of-type(4)>.review-text>p:last-of-type {
+        margin-top: 35px;
+    }
+
+    .catalog-blocks__block {
+        grid-template-columns: repeat(17, 1fr);
+    }
+
+    .catalog-blocks__block>p {
+        grid-column: 2/4;
+        font-size: 76px;
+    }
+
+    .catalog-blocks__block-content {
+        grid-column: 4/10;
+        margin-top: 0;
+        height: 100%;
+    }
+
+    .catalog-blocks__block>img {
+        grid-column: 11 / 17;
+        height: 339px;
+    }
+
+    .catalog-blocks__block-content p {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 900px) {
+    header {
+        padding: 0 calc((100% - 350px) / 2);
+
+    }
+
+    .header-top {
+        padding: 22px 0;
+    }
+
+    .header-bottom,
+    .header-top>a,
+    .header-top>p,
+    .header-top>a>button {
+        display: none;
+    }
+
+    .burger-menu {
+        display: flex;
+        margin-left: auto;
+    }
+
+    #menu-toggle:checked~.dropdown-menu {
+        display: flex;
+        gap: 16px;
+    }
+
+    #menu-toggle:checked+.burger-menu .line:nth-child(1) {
+        width: 25px;
+        transform: rotate(45deg);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #menu-toggle:checked+.burger-menu .line:nth-child(2) {
+        opacity: 0;
+        height: 0;
+        margin: 0;
+    }
+
+    #menu-toggle:checked+.burger-menu .line:nth-child(3) {
+        width: 25px;
+        transform: rotate(-45deg);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .block-social {
+        height: 16px;
+        gap: 16px;
+    }
+
+    .icon-social {
+        height: 16px
+    }
+
+    .logo {
+        margin-left: 73px;
+        margin-right: 137px;
+        width: 38px;
+        height: 36px;
+    }
+
+    button {
+        border-radius: 10px;
+    }
+
+    .container {
+        padding: 0 calc((100% - 350px) / 2);
+    }
+
+    .welcome {
+        align-items: flex-start;
+        background-size: contain;
+        background-position: bottom;
+        height: 505px;
+    }
+
+    .welcome>div {
+        margin-top: 43px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .welcome>div>h1 {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .welcome>div>p {
+        font-size: 14px;
+        margin: 20px 0 35px 0px;
+        text-align: center;
+    }
+
+    .welcome>div>button {
+        width: 122px;
+        height: 26px;
+        font-size: 10px;
+    }
+
+    .wedding-planning {
+        margin-top: 66px;
+    }
+
+    .wedding-planning-inside {
+        background-image: url('../img/background-wedding-planning-small.svg');
+        display: flex;
+        justify-content: center;
+        height: 293px;
+    }
+
+    .wedding-planning-inside__container {
+        padding: 52px 0 0 0;
+        max-width: 256px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wedding-planning-inside__container>h1 {
+        font-size: 22px;
+        width: min-content;
+        text-align: center;
+    }
+
+    .wedding-planning-inside__container>p {
+        font-size: 14px;
+        text-align: center;
+        width: 200px;
+    }
+
+    .wedding-planning-buttons>button {
+        width: 122px;
+        height: 26px;
+        font-size: 10px;
+        gap: 12px;
+    }
+
+    .wedding-planning-outside {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wedding-planning-outside__block {
+        width: 200px;
+        height: 90px;
+        align-items: center;
+    }
+
+    .wedding-planning-outside__block>p {
+        font-size: 16px;
+        max-width: 182px;
+    }
+
+    .wedding-planning-outside__block>img {
+        margin: 11px 0 13px 0;
+        height: 15px;
+    }
+
+    .about-us {
+        background-image: url('../img/background-about-us-small.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-top: 126px;
+        padding-bottom: 163px;
+    }
+
+    .about-us>h2 {
+        font-size: 28px;
+        margin-bottom: 73px;
+    }
+
+    .about-us__blocks,
+    .about-us__blocks>div {
+        gap: 40px;
+    }
+
+    .about-us__blocks>div>div {
+        width: 350px;
+        height: 215px;
+    }
+
+    .about-us__blocks>div>div>p:first-child {
+        font-size: 36px;
+    }
+
+    .about-us__blocks>div>div>p:last-child {
+        font-size: 16px;
+    }
+
+    .about-us__blocks>div:nth-child(3)>div:nth-child(1) {
+        width: 291px;
+        height: 516px;
+        padding: 67px 0 39px 60px;
+    }
+
+    .about-us__blocks>div:nth-child(3)>div:nth-child(1)>h2 {
+        font-size: 24px;
+        margin-bottom: 14px;
+    }
+
+    .about-us__blocks>div:nth-child(3)>div:nth-child(1)>p {
+        font-size: 16px;
+        max-width: 205px;
+        margin-top: 10px;
+    }
+
+    .about-us__blocks>div:nth-child(3)>div:nth-child(1)>button {
+        width: 215px;
+        height: 36px;
+        font-size: 15px;
+        margin-top: 46px;
+    }
+
+    .feedback-form>h1 {
+        font-size: 24px;
+        width: 340px;
+    }
+
+    .feedback-form>p {
+        width: 307px;
+        font-size: 16px;
+        padding-top: 20px;
+        padding-bottom: 128px;
+    }
+
+    .feedback-form>form {
+        gap: 63px;
+    }
+
+    .feedback-form>form>input {
+        width: 350px;
+        font-size: 14px;
+    }
+
+    .feedback-form>form>input::placeholder {
+        font-size: 14px;
+    }
+
+    .feedback-form>form>button {
+        width: 167px;
+        height: 37px;
+        font-size: 14px;
+    }
+
+    .indispensable {
+        padding-top: 177px;
+        background-image: url('../img/background-indispensable-small.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        padding-bottom: 136px;
+    }
+
+    .indispensable-border {
+        margin: 0 calc((100% - 350px) / 2);
+    }
+
+    .indispensable-border {
+        padding-top: 27px;
+        padding-bottom: 48px;
+    }
+
+    .indispensable-border>h2 {
+        font-size: 28px;
+    }
+
+    .indispensable-blocks {
+        margin-top: 65px;
+        flex-direction: column;
+        gap: 77px;
+    }
+
+    .indispensable-blocks>div>img {
+        width: 64px;
+        height: 68px;
+    }
+
+    .indispensable-blocks>div>p:first-of-type {
+        font-size: 16px;
+        margin-top: 35px;
+        margin-bottom: 15px;
+    }
+
+    .indispensable-blocks>div>p:last-of-type {
+        font-size: 14px;
+        max-width: 250px;
+    }
+
+    footer {
+        padding-top: 28px;
+        padding-bottom: 0px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('../img/background-footer-small.svg');
+    }
+
+    .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-top>img {
+        width: 46px;
+        height: 43px;
+    }
+
+    .footer-links {
+        display: none;
+    }
+
+    .footer-bottom {
+        padding: 10px;
+        margin-top: 37px;
+    }
+
+    footer>p {
+        display: none;
+    }
+
+    .footer-hiden {
+        font-size: 13px;
+        margin-top: 11px;
+        display: block;
+    }
+
+    .footer-top>button {
+        width: 130px;
+        height: 35px;
+        font-size: 12px;
+        margin-top: 31px;
+    }
+
+    .footer-bottom>p:first-child,
+    .footer-bottom>p:last-child {
+        font-size: 8px;
+    }
+
+    .footer-bottom>p:nth-child(2) {
+        font-size: 12px;
+    }
+
+    .services {
+        background: url('../img/background-services-small.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .services h2 {
+        font-size: 28px;
+        padding-top: 61px;
+        margin-bottom: 57px;
+    }
+
+    .services-blocks {
+        padding: 0 calc((100% - 350px) / 2);
+        padding-bottom: 143px;
+        gap: 18px;
+    }
+
+    .services-block {
+        grid-template-columns: 38% 62%;
+        padding: 19px;
+    }
+
+    .services-block-border>p {
+        bottom: -5px;
+        left: 4px;
+        font-size: 12px;
+    }
+
+    .services-blocks>.services-block:not(:last-child) {
+        width: 128px;
+        height: 121px;
+        grid-template-columns: 60% 40%;
+    }
+
+    .services-blocks>.services-block:nth-child(1) {
+        background-image: url('../img/background-catering-small.svg');
+    }
+
+    .services-blocks>.services-block:nth-child(2) {
+        background-image: url('../img/background-ceremonies-small.svg');
+    }
+
+    .services-blocks>.services-block:nth-child(3) {
+        background-image: url('../img/background-suits-small.svg');
+    }
+
+    .services-blocks>.services-block:nth-child(4) {
+        background-image: url('../img/background-organization-small.svg');
+    }
+
+    .services-blocks>.services-block:last-child {
+        grid-template-columns: 28% 72%;
+        height: 121px;
+        background-image: url('../img/background-photozone-small.svg');
+    }
+
+
+    .left-block {
+        display: none;
+    }
+
+    .right-block {
+        padding: 0 calc((100% - 350px) / 2);
+        padding-top: 67px;
+        padding-bottom: 80px;
+    }
+
+    .right-block h2 {
+        font-size: 28px;
+        margin-bottom: 33px;
+    }
+
+    .right-block p {
+        font-size: 16px;
+        margin-bottom: 27px;
+        max-width: 350px;
+        text-align: left;
+    }
+
+    .right-block button {
+        border: none;
+        margin-top: 15px;
+        width: 170px;
+        height: 41px;
+        font-size: 14px;
+    }
+
+    .care {
+        padding-top: 90px;
+        padding-bottom: 42px;
+        background-image: url('../img/background-care-small.svg');
+    }
+
+    .care-border {
+        margin: 0 calc((100% - 350px) / 2);
+        padding-top: 51px;
+        gap: 110px;
+    }
+
+    .care-border img {
+        width: 350px;
+        height: 100%;
+    }
+
+    .care__right-content h1 {
+        margin-top: 0;
+        font-size: 28px;
+    }
+
+    .care__right-content p {
+        margin-top: 18px;
+        font-size: 16px;
+    }
+
+    .care__right-content button {
+        font-size: 14px;
+        width: 170px;
+        height: 41px;
+    }
+
+    .care__left-hint {
+        padding: 10px 0;
+        width: 100%;
+        border-radius: 0;
+        top: -540px;
+    }
+
+    .care__left-hint p {
+        font-size: 14px;
+        margin: 0 calc((100% - 350px) / 2);
+    }
+
+    .portfolio {
+        display: none;
+    }
+
+    .portfolio-block__photos>div:first-child img:first-of-type {
+        height: 175px;
+    }
+
+
+    .portfolio-mob {
+        display: block;
+        text-align: center;
+        padding-bottom: 162px;
+    }
+
+    .portfolio-mob h2 {
+        font-size: 28px;
+        margin-top: 61px;
+    }
+
+    .portfolio-block {
+        background-image: url('../img/background-portfolio-small.svg');
+    }
+
+    .portfolio-block:nth-of-type(2),
+    .portfolio-block:nth-of-type(3) {
+        padding-top: 93px;
+    }
+
+    .portfolio-block__photos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .portfolio-block:first-of-type {
+        padding-top: 117px;
+    }
+
+    .portfolio-block__photos>div {
+        border-radius: 10px;
+        overflow: hidden;
+        height: 175px;
+    }
+
+    .portfolio-block__photos>div img {
+        width: 170px;
+        height: 175px;
+        object-fit: cover;
+    }
+
+    .portfolio-block__photos>div:last-of-type {
+        grid-column: span 2;
+    }
+
+    .portfolio-block__photos>div:last-of-type img {
+        width: 350px;
+    }
+
+    .portfolio-footer {
+        margin-top: 30px;
+        display: grid;
+        gap: 29px;
+        justify-content: space-between;
+        padding-bottom: 40px;
+    }
+
+    .portfolio-footer p:first-child {
+        font-size: 16px;
+        grid-row: 1;
+        text-align: start;
+    }
+
+    .portfolio-footer p:last-of-type {
+        grid-row: 1;
+        font-size: 12px;
+        text-align: end;
+    }
+
+    .portfolio-footer a {
+        grid-column: 2;
+        font-size: 16px;
+        text-align: end;
+    }
+
+    .reviews-start {
+        margin-top: 101px;
+        padding-top: 53px;
+        padding-bottom: 35px;
+    }
+
+    .reviews-start p:first-of-type {
+        font-size: 12px;
+    }
+
+    .reviews-start p:last-of-type {
+        font-size: 14px;
+        max-width: 350px;
+    }
+
+    .reviews-start h1 {
+        font-size: 24px;
+        margin-top: 42px;
+        margin-bottom: 25px;
+        max-width: 168px;
+    }
+
+    .reviews-left-border-background {
+        width: 35%;
+        height: 2305px;
+    }
+
+    .reviews-gray-left-border-background {
+        border-right: 5px solid #1E1E1E;
+        position: absolute;
+        left: -3px;
+        width: 35%;
+        height: 2000px;
+        top: 170px;
+        z-index: 1;
+    }
+
+
+    .review-photo p {
+        width: 50px;
+        height: 21px;
+        font-size: 13px;
+        left: 40px;
+        top: -10px;
+    }
+
+    .review-photo img {
+        width: 344px;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .review-text {
+        padding: 0 calc((100% - 350px) / 2);
+        background-position: center;
+        background-size: contain;
+    }
+
+    .review-text h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .review-text p:first-of-type {
+        font-size: 16px;
+    }
+
+    .review-text p:last-of-type {
+        font-size: 12px;
+    }
+
+    .reviews>.review:nth-child(4),
+    .reviews>.review:nth-child(5),
+    .reviews>.review:nth-child(6) {
+        padding-bottom: 90px;
+    }
+
+    .catalog>h2 {
+        margin: 65px 0 87px;
+        font-size: 28px;
+    }
+
+    .catalog-blocks {
+        display: block;
+        background: url('../img/background-catalog-small.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: bottom;
+        padding-bottom: 209px;
+    }
+
+    .catalog-blocks__block {
+        display: block;
+        border-radius: 10px;
+    }
+
+    .catalog-blocks__block {
+        background-color: #4D4D4D;
+        height: 391px;
+        padding: 0 calc((100% - 350px) / 2);
+        margin-top: 87px;
+    }
+
+    .catalog-blocks__block:nth-of-type(1) {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/catalog-man-clothes.svg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .catalog-blocks__block:nth-of-type(2) {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/catalog-wedding-dresses.svg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .catalog-blocks__block:nth-of-type(3) {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/catalog-professional-makeup-artists.svg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .catalog-blocks__block:nth-of-type(4) {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/catalog-individual-tailoring.svg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .catalog-blocks__block:nth-of-type(5) {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/catalog-wedding-rings.svg');
+        background-size: cover;
+        background-position: center;
+    }
+
+
+    .catalog-blocks__block>p {
+        font-size: 48px;
+        margin: 37px 0 46px;
+    }
+
+    .catalog-blocks__block-content h3 {
+        font-size: 24px;
+        max-width: 288px;
+    }
+
+    .catalog-blocks__block-content button {
+        width: 170px;
+        height: 39px;
+        font-size: 16px;
+        position: relative;
+        margin-top: 105px;
+    }
+
+    .catalog-blocks__block-content>p,
+    .catalog-blocks__block>img {
+        display: none;
+    }
+}

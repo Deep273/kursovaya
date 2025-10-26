@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #0e0e10;
+    margin: 0;
+    padding: 0;
+    color: #e6e6e6;
+}
+
+.account {
+    max-width: 650px;
+    margin: 80px auto;
+    background: #1a1a1d;
+    padding: 45px;
+    border-radius: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    border: 1px solid #2b2b33;
+}
+
+.account h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    color: #b097ff;
+    font-size: 28px;
+}
+
+.profile-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.user-avatar-large {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #3a3a4a;
+    box-shadow: 0 0 15px rgba(104, 72, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-avatar-large:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(126, 89, 255, 0.7);
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #b8b8ff;
+    letter-spacing: 0.5px;
+}
+
+.form-group input[type="text"] {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #3c3c47;
+    background: #121216;
+    color: #eaeaea;
+    font-size: 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 6px rgba(124, 58, 237, 0.6);
+    outline: none;
+}
+
+.form-group input[type="file"] {
+    background: linear-gradient(135deg, #5a3ef1, #1f6fff);
+    color: #fff;
+    border-radius: 12px;
+    padding: 12px 0;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.form-group label.file-label {
+    background: linear-gradient(135deg, #5a3ef1, #1f6fff);
+    color: #fff;
+    border-radius: 12px;
+    padding: 12px 0;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.form-group label.file-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(95, 61, 255, 0.6);
+}
+
+/* ====== Кнопка ====== */
+.save-btn {
+    background: linear-gradient(135deg, #5a3ef1, #1f6fff);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 0;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(95, 61, 255, 0.7);
+}
+
+.error {
+    color: #ff5e5e;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #7aa2ff;
+    font-weight: 700;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.back-link:hover {
+    color: #b097ff;
+    transform: translateX(-3px);
+}

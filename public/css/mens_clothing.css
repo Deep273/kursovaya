@@ -1,0 +1,117 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin: 40px 0 20px 0;
+    color: white;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 0 20px 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background-color: #121212;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 156, 223, 0.4);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 156, 223, 0.7);
+}
+
+.product-card img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 220px;
+    margin-bottom: 12px;
+}
+
+.product-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #00aaff;
+    text-align: center;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 500;
+    color: #66ccff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.product-card {
+    background-color: #121212;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 156, 223, 0.4);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* расстояние между элементами */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 156, 223, 0.7);
+}
+
+.product-card {
+    background-color: #121212;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 156, 223, 0.4);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 156, 223, 0.7);
+}
+
+.cart-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+.cart-icon-btn img {
+    filter: invert(100%) brightness(1.2);
+    transition: filter 0.3s ease;
+}
+
+.cart-icon-btn:hover img {
+    filter: invert(60%) brightness(1.5);
+}
+
