@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     protected $primaryKey = 'service_id';
-    protected $fillable = ['name', 'category', 'price'];
+    protected $fillable = ['name', 'category', 'price', 'image'];
 }

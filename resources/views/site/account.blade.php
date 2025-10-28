@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет</title>
     <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
@@ -25,14 +26,15 @@
 
         @if(Auth::check())
             <div class="user-dropdown">
-                <div class="profile-avatar">
-                    <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/default-avatar.png') }}" alt="avatar" class="user-avatar-large">
+                <div class="nav-avatar">
+                    <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/default-avatar.png') }}"
+                         alt="avatar" class="user-avatar-large">
                 </div>
                 <div class="user-menu">
                     <a href="{{ route('account') }}">Личный кабинет</a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit">Выйти</button>
+                        <button type="submit" class="logout-btn">Выйти</button>
                     </form>
                 </div>
             </div>
@@ -41,6 +43,7 @@
                 <button class="u-bold auth-btn">Войти</button>
             </a>
         @endif
+
     </div>
 
     <div class="header-bottom d-f j-c_c">
@@ -123,7 +126,21 @@
             <a href="{{ route('reviews') }}">Отзывы</a>
             <a href="#">Контакты</a>
         </div>
+        <p class="footer-hiden">
+            Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им
+            незабываемые впечатления.
+        </p>
         <button class="u-bold">Связаться</button>
+    </div>
+    <p class="container">
+        Наш свадебный портал призван серьезно
+        облегчить жизнь будущим молодоженам,
+        подарив им незабываемые впечатления.
+    </p>
+    <div class="footer-bottom container u-bold d-f s-b a-i_c">
+        <p class="u-bold">&copy;2024 Все права защищены</p>
+        <p class="u-bold">+7 952 884-26-95</p>
+        <p class="u-bold">tebe_chego@inbox.ru</p>
     </div>
 </footer>
 </body>

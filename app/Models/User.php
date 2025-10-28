@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     protected $primaryKey = 'user_id';
-    protected $fillable = ['name', 'email', 'number_phone', 'password', 'role'];
+    protected $fillable = ['name', 'email', 'number_phone', 'password', 'role', 'avatar'];
 
     public function weddingProjects()
     {

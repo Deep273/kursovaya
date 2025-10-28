@@ -10,12 +10,10 @@
 <section class="account">
     <h2>Редактирование профиля</h2>
 
-    {{-- Отображение текущего аватара --}}
     <div class="profile-avatar">
         <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/default-avatar.png') }}" alt="avatar" class="user-avatar-large">
     </div>
 
-    {{-- Форма редактирования --}}
     <form action="{{ route('account.profile.update') }}" method="POST" enctype="multipart/form-data" class="profile-form">
         @csrf
 

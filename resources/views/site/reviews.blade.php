@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отзывы</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
@@ -15,25 +16,30 @@
 <header class="d-f f-d_c">
     <div class="header-top d-f s-b a-i_c">
         <div class="block-social d-f">
-            <a href="#"><img src="img/vk.png" alt="vk" class="icon-social"></a>
-            <a href="#"><img src="img/instagram.png" alt="instagram" class="icon-social"></a>
-            <a href="#"><img src="img/telegram.png" alt="telegram" class="icon-social"></a>
+            <a href="#"><img src="{{ asset('img/vk.png') }}" alt="vk" class="icon-social"></a>
+            <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="instagram" class="icon-social"></a>
+            <a href="#"><img src="{{ asset('img/telegram.png') }}" alt="telegram" class="icon-social"></a>
         </div>
         <p>tebe_chego@inbox.ru</p>
         <a href="{{ route('main') }}">
             <img src="img/logo.png" alt="logo" class="logo">
         </a>
         <p>+7 952 884-26-95</p>
-        @if(Auth::check())
-            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                @csrf
-                <button class="u-bold" type="submit">Выйти</button>
-            </form>
-        @else
-            <a href="{{ route('auth') }}">
-                <button class="u-bold">Войти</button>
-            </a>
-        @endif
+        <div class="user-dropdown">
+            <button class="auth-btn">Меню</button>
+            <div class="user-menu">
+                @if(Auth::check())
+                    <a href="{{ route('account') }}">Личный кабинет</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="logout-btn">Выйти</button>
+                    </form>
+                @else
+                    <a href="{{ route('auth') }}">Войти</a>
+                    <a href="{{ route('register') }}">Зарегистрироваться</a>
+                @endif
+            </div>
+        </div>
         <!-- Бургер-меню -->
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="burger-menu f-d_c">
@@ -137,7 +143,7 @@
 <footer>
     <div class="footer-top container d-f s-b a-i_c">
         <a href="{{ route('main') }}">
-            <img src="img/logo.png" alt="logo" class="logo">
+            <img src="{{ asset('img/logo.png') }}" alt="logo" class="logo">
         </a>
         <div class="footer-links d-f">
             <a href="{{ route('portfolio') }}">Портфолио</a>

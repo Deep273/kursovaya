@@ -32,7 +32,14 @@ class AdminServiceController extends Controller
             'name' => 'required|string|max:100',
             'category' => 'required|string|in:Кейтеринг,Церемонии,Стилисты и Визажисты,Организация,Фотограф и фотозоны',
             'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|max:2048', // проверка изображения
         ]);
+
+        // Загрузка фото
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('service_images', 'public');
+            $validated['image'] = $path;
+        }
 
         Service::create($validated);
 
@@ -45,9 +52,17 @@ class AdminServiceController extends Controller
             'name' => 'required|string|max:100',
             'category' => 'required|string|in:Кейтеринг,Церемонии,Стилисты и Визажисты,Организация,Фотограф и фотозоны',
             'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $service = Service::findOrFail($id);
+
+        // Обновляем фото, если загружено новое
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('service_images', 'public');
+            $validated['image'] = $path;
+        }
+
         $service->update($validated);
 
         return redirect()->route('admin_services')->with('success', 'Услуга успешно обновлена!');
@@ -60,5 +75,4 @@ class AdminServiceController extends Controller
 
         return redirect()->route('admin_services')->with('success', 'Услуга удалена.');
     }
-
 }

@@ -17,7 +17,7 @@ class AdminCatalogController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        // 🏷Фильтрация по категории
+        // Фильтрация по категории
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
@@ -27,7 +27,6 @@ class AdminCatalogController extends Controller
         return view('adminpanel.admin_catalog', compact('products'));
     }
 
-
     // Добавление товара
     public function store(Request $request)
     {
@@ -36,27 +35,18 @@ class AdminCatalogController extends Controller
             'description' => 'required|string',
             'category' => 'required|string|max:100',
             'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // проверка файла
         ]);
+
+        // Если есть загруженное фото — сохраняем
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('catalog_images', 'public');
+            $validated['image'] = $path;
+        }
 
         ProductCatalog::create($validated);
 
         return redirect()->route('admin_catalog')->with('success', 'Товар успешно добавлен!');
-    }
-
-    // Удаление
-    public function destroy($id)
-    {
-        $product = ProductCatalog::findOrFail($id);
-        $product->delete();
-
-        return redirect()->route('admin_catalog')->with('success', 'Товар успешно удалён!');
-    }
-
-    // Редактирование (модалка не требует отдельной страницы)
-    public function edit($id)
-    {
-        $product = ProductCatalog::findOrFail($id);
-        return view('adminpanel.admin_catalog', compact('product'));
     }
 
     // Обновление товара
@@ -67,11 +57,28 @@ class AdminCatalogController extends Controller
             'description' => 'required|string',
             'category' => 'required|string|max:100',
             'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $product = ProductCatalog::findOrFail($id);
+
+        // Если пользователь загрузил новое фото — заменяем
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('catalog_images', 'public');
+            $validated['image'] = $path;
+        }
+
         $product->update($validated);
 
         return redirect()->route('admin_catalog')->with('success', 'Товар успешно обновлён!');
+    }
+
+    // Удаление
+    public function destroy($id)
+    {
+        $product = ProductCatalog::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('admin_catalog')->with('success', 'Товар успешно удалён!');
     }
 }

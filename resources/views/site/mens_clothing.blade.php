@@ -13,39 +13,37 @@
 <header class="d-f f-d_c">
     <div class="header-top d-f s-b a-i_c">
         <div class="block-social d-f">
-            <a href="#"><img src="img/vk.png" alt="vk" class="icon-social"></a>
-            <a href="#"><img src="img/instagram.png" alt="instagram" class="icon-social"></a>
-            <a href="#"><img src="img/telegram.png" alt="telegram" class="icon-social"></a>
+            <a href="#"><img src="{{ asset('img/vk.png') }}" alt="vk" class="icon-social"></a>
+            <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="instagram" class="icon-social"></a>
+            <a href="#"><img src="{{ asset('img/telegram.png') }}" alt="telegram" class="icon-social"></a>
         </div>
         <p>tebe_chego@inbox.ru</p>
         <a href="{{ route('main') }}">
-            <img src="img/logo.png" alt="logo" class="logo">
+            <img src="{{ asset('img/logo.png') }}" alt="logo" class="logo">
         </a>
-
         <p>+7 952 884-26-95</p>
+        <div class="user-dropdown">
+            <button class="auth-btn">Меню</button>
+            <div class="user-menu">
+                @if(Auth::check())
+                    <a href="{{ route('account') }}">Личный кабинет</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="logout-btn">Выйти</button>
+                    </form>
+                @else
+                    <a href="{{ route('auth') }}">Войти</a>
+                    <a href="{{ route('register') }}">Зарегистрироваться</a>
+                @endif
+            </div>
+        </div>
 
-        {{-- Проверка авторизации --}}
-        @if(Auth::check())
-            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                @csrf
-                <button class="u-bold auth-btn" type="submit">Выйти</button>
-            </form>
-        @else
-            <a href="{{ route('auth') }}">
-                <button class="u-bold auth-btn">Войти</button>
-            </a>
-        @endif
-
-
-
-        <!-- Бургер-меню -->
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="burger-menu f-d_c">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
         </label>
-        <!-- Выпадающее меню -->
         <nav class="dropdown-menu">
             <div class="dropdown-links d-f f-d_c">
                 <a href="{{ route('portfolio') }}">Портфолио</a>
@@ -60,6 +58,7 @@
             </div>
         </nav>
     </div>
+
     <div class="header-bottom d-f j-c_c">
         <a href="{{ route('portfolio') }}">Портфолио</a>
         <a href="{{ route('services') }}">Услуги</a>
@@ -69,34 +68,36 @@
     </div>
 </header>
 
+
 <main class="catalog-page container">
     <h2 class="page-title">Мужская одежда</h2>
 
     <div class="product-grid">
         @forelse($products as $product)
-            <div class="product-card">
+            <div class="product-card" style="background-image: url('{{ asset('img/background.svg') }}');">
+
                 <button class="btn cart-icon-btn" aria-label="Добавить в корзину">
-                    <img src="{{ asset('img/cart-icon.svg') }}" alt="Иконка корзины" width="30" height="30">
+                    <img src="{{ asset('img/shopping-cart-products.svg') }}" alt="Иконка корзины">
                 </button>
 
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                 <h3>{{ $product->name }}</h3>
                 <p class="price">{{ number_format($product->price, 0, ',', ' ') }} ₽</p>
 
-                <a href="{{ route('product_details.index', $product->product_catalog_id) }}" class="btn more-btn">Подробнее</a>
-
+                <button class="more-btn">
+                    <a href="{{ route('product_details.index', $product->product_catalog_id) }}" class="u-bold">Подробнее</a>
+                </button>
             </div>
         @empty
             <p>Товары в этой категории пока отсутствуют.</p>
         @endforelse
     </div>
-
 </main>
 
 <footer>
     <div class="footer-top container d-f s-b a-i_c">
         <a href="{{ route('main') }}">
-            <img src="img/logo.png" alt="logo" class="logo">
+            <img src="{{ asset('img/logo.png') }}" alt="logo" class="logo">
         </a>
         <div class="footer-links d-f">
             <a href="{{ route('portfolio') }}">Портфолио</a>
@@ -107,13 +108,13 @@
         </div>
         <p class="footer-hiden">
             Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им
-            незабываемыевпечатления.
+            незабываемые впечатления.
         </p>
         <button class="u-bold">Связаться</button>
     </div>
     <p class="container">
         Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им
-        незабываемыевпечатления.
+        незабываемые впечатления.
     </p>
     <div class="footer-bottom container u-bold d-f s-b a-i_c">
         <p class="u-bold">&copy;2024 Все права защищены</p>

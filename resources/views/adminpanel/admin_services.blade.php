@@ -10,6 +10,7 @@
 <body>
 <div class="admin-wrapper">
 
+    <!-- Сайдбар -->
     <aside class="admin-sidebar">
         <div>
             <h2 class="admin-logo">Admin<span>Panel</span></h2>
@@ -28,6 +29,7 @@
         </div>
     </aside>
 
+    <!-- Основной контент -->
     <main class="admin-content">
         <header class="admin-topbar">
             <h1>Управление услугами</h1>
@@ -48,6 +50,7 @@
             </div>
         </header>
 
+        <!-- Таблица -->
         <section class="admin-table">
             <div class="admin-table-header">
                 <span>Название</span>
@@ -62,6 +65,17 @@
                     <span>{{ $service->category }}</span>
                     <span>{{ number_format($service->price, 0, ',', ' ') }} ₽</span>
                     <div class="admin-actions">
+
+                        <!-- Кнопка "Подробнее" -->
+                        <button class="admin-details-btn btn"
+                                data-name="{{ $service->name }}"
+                                data-category="{{ $service->category }}"
+                                data-price="{{ number_format($service->price, 0, ',', ' ') }} ₽"
+                                data-image="{{ asset('storage/' . $service->image) }}">
+                            Подробнее
+                        </button>
+
+                        <!-- Кнопка "Редактировать" -->
                         <button class="admin-edit-btn btn"
                                 data-id="{{ $service->service_id }}"
                                 data-name="{{ $service->name }}"
@@ -70,6 +84,8 @@
                                 data-route="{{ route('services.update', $service->service_id) }}">
                             Редактировать
                         </button>
+
+                        <!-- Кнопка "Удалить" -->
                         <form method="POST" action="{{ route('services.destroy', $service->service_id) }}" onsubmit="return confirm('Удалить эту услугу?');">
                             @csrf
                             @method('DELETE')
@@ -86,10 +102,11 @@
 <div class="modal" id="addServiceModal">
     <div class="modal-content">
         <h2>Добавить услугу</h2>
-        <form class="service-form" method="POST" action="{{ route('services.store') }}">
+        <form class="service-form" method="POST" action="{{ route('services.store') }}" enctype="multipart/form-data">
             @csrf
             <label>Название услуги</label>
             <input type="text" name="name" placeholder="Введите название" required>
+
             <label>Категория</label>
             <select name="category" required>
                 <option value="" disabled selected>Выберите категорию</option>
@@ -99,8 +116,13 @@
                 <option value="Организация">Организация</option>
                 <option value="Фотограф и фотозоны">Фотограф и фотозоны</option>
             </select>
+
             <label>Цена</label>
             <input type="number" name="price" placeholder="Введите цену, ₽" required min="0">
+
+            <label>Фото услуги</label>
+            <input type="file" name="image" accept="image/*">
+
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
                 <button type="button" class="cancel-btn btn" id="closeAddModalBtn">Отмена</button>
@@ -109,63 +131,47 @@
     </div>
 </div>
 
-<!-- Модалка редактирования -->
-<div class="modal" id="editServiceModal">
+<!-- Модалка "Подробнее" -->
+<div class="modal" id="detailsModal">
     <div class="modal-content">
-        <h2>Редактировать услугу</h2>
-        <form method="POST" id="editServiceForm" class="service-form">
-            @csrf
-            @method('PUT')
-            <input type="hidden" name="service_id" id="edit_service_id">
-            <label>Название услуги</label>
-            <input type="text" name="name" id="edit_name" placeholder="Введите название" required>
-            <label>Категория</label>
-            <select name="category" id="edit_category" required>
-                <option value="" disabled>Выберите категорию</option>
-                <option value="Кейтеринг">Кейтеринг</option>
-                <option value="Церемонии">Церемонии</option>
-                <option value="Стилисты и Визажисты">Стилисты и Визажисты</option>
-                <option value="Организация">Организация</option>
-                <option value="Фотограф и фотозоны">Фотограф и фотозоны</option>
-            </select>
-            <label>Цена</label>
-            <input type="number" name="price" id="edit_price" placeholder="Введите цену, ₽" required min="0">
-            <div class="form-buttons">
-                <button type="submit" class="save-btn btn">Сохранить</button>
-                <button type="button" class="cancel-btn btn" id="closeEditFormBtn">Отмена</button>
-            </div>
-        </form>
+        <h2>Информация об услуге</h2>
+        <img id="details_image" src="" alt="Фото услуги">
+        <div class="details-info">
+            <div class="details-row"><strong>Название:</strong> <span id="details_name"></span></div>
+            <div class="details-row"><strong>Категория:</strong> <span id="details_category"></span></div>
+            <div class="details-row"><strong>Цена:</strong> <span id="details_price"></span></div>
+        </div>
+        <div class="form-buttons">
+            <button type="button" class="cancel-btn btn" id="closeDetailsModalBtn">Закрыть</button>
+        </div>
     </div>
 </div>
 
 <script>
-    // Модалка добавления
+    // === Модалка добавления ===
     const addModal = document.getElementById('addServiceModal');
     const openAddBtn = document.getElementById('openAddModalBtn');
     const closeAddBtn = document.getElementById('closeAddModalBtn');
-
     openAddBtn.addEventListener('click', () => addModal.classList.add('show'));
     closeAddBtn.addEventListener('click', () => addModal.classList.remove('show'));
     window.addEventListener('click', e => { if (e.target === addModal) addModal.classList.remove('show'); });
 
-    // Модалка редактирования
-    const editModal = document.getElementById('editServiceModal');
-    const closeEditBtn = document.getElementById('closeEditFormBtn');
-    const editForm = document.getElementById('editServiceForm');
+    // === Модалка "Подробнее" ===
+    const detailsModal = document.getElementById('detailsModal');
+    const closeDetailsBtn = document.getElementById('closeDetailsModalBtn');
 
-    document.querySelectorAll('.admin-edit-btn').forEach(btn => {
+    document.querySelectorAll('.admin-details-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            editForm.action = btn.dataset.route;
-            document.getElementById('edit_service_id').value = btn.dataset.id;
-            document.getElementById('edit_name').value = btn.dataset.name;
-            document.getElementById('edit_category').value = btn.dataset.category;
-            document.getElementById('edit_price').value = btn.dataset.price;
-            editModal.classList.add('show');
+            document.getElementById('details_name').textContent = btn.dataset.name;
+            document.getElementById('details_category').textContent = btn.dataset.category;
+            document.getElementById('details_price').textContent = btn.dataset.price;
+            document.getElementById('details_image').src = btn.dataset.image;
+            detailsModal.classList.add('show');
         });
     });
 
-    closeEditBtn.addEventListener('click', () => editModal.classList.remove('show'));
-    window.addEventListener('click', e => { if (e.target === editModal) editModal.classList.remove('show'); });
+    closeDetailsBtn.addEventListener('click', () => detailsModal.classList.remove('show'));
+    window.addEventListener('click', e => { if (e.target === detailsModal) detailsModal.classList.remove('show'); });
 </script>
 </body>
 </html>

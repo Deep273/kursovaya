@@ -13,5 +13,7 @@ class ProductCatalog extends Model
     protected $primaryKey = 'product_catalog_id';
 
     // Разрешённые для массового заполнения поля
-    protected $fillable = ['name', 'description', 'category', 'price'];
+    protected $fillable = ['name', 'description', 'category', 'price', 'image'];
+
 }
+

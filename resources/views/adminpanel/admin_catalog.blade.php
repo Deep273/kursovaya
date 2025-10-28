@@ -10,6 +10,7 @@
 <body>
 <div class="admin-wrapper">
 
+    <!-- Сайдбар -->
     <aside class="admin-sidebar">
         <div>
             <h2 class="admin-logo">Admin<span>Panel</span></h2>
@@ -28,6 +29,7 @@
         </div>
     </aside>
 
+    <!-- Основной контент -->
     <main class="admin-content">
         <header class="admin-topbar">
             <h1>Управление каталогом</h1>
@@ -46,6 +48,7 @@
             </form>
         </header>
 
+        <!-- Таблица -->
         <section class="admin-table">
             <div class="admin-table-header">
                 <span>Имя</span>
@@ -62,15 +65,17 @@
                     <span>{{ $product->category }}</span>
                     <span>{{ number_format($product->price, 0, ',', ' ') }} ₽</span>
                     <div class="admin-actions">
-                        <button class="admin-edit-btn btn"
-                                data-id="{{ $product->product_catalog_id }}"
-                                data-name="{{ $product->name }}"
-                                data-description="{{ $product->description }}"
-                                data-category="{{ $product->category }}"
-                                data-price="{{ $product->price }}"
-                                data-route="{{ route('catalog.update', $product->product_catalog_id) }}">
+                        <!-- Кнопка "Подробнее" -->
+                        <button class="admin-details-btn btn" data-name="{{ $product->name }}" data-description="{{ $product->description }}" data-category="{{ $product->category }}" data-price="{{ number_format($product->price, 0, ',', ' ') }} ₽" data-image="{{ asset('storage/' . $product->image) }}">
+                            Подробнее
+                        </button>
+
+                        <!-- Кнопка "Редактировать" -->
+                        <button class="admin-edit-btn btn" data-id="{{ $product->product_catalog_id }}" data-name="{{ $product->name }}" data-description="{{ $product->description }}" data-category="{{ $product->category }}" data-price="{{ $product->price }}" data-route="{{ route('catalog.update', $product->product_catalog_id) }}">
                             Редактировать
                         </button>
+
+                        <!-- Кнопка "Удалить" -->
                         <form method="POST" action="{{ route('catalog.destroy', $product->product_catalog_id) }}" onsubmit="return confirm('Вы уверены, что хотите удалить этот товар?');">
                             @csrf
                             @method('DELETE')
@@ -79,7 +84,7 @@
                     </div>
                 </div>
             @empty
-                <p style="padding: 15px; color:white;">Товары не найдены.</p>
+                <p>Товары не найдены.</p>
             @endforelse
         </section>
     </main>
@@ -89,12 +94,14 @@
 <div class="modal" id="addCatalogModal">
     <div class="modal-content">
         <h2>Добавить товар</h2>
-        <form class="catalog-form" method="POST" action="{{ route('catalog.store') }}">
+        <form class="catalog-form" method="POST" action="{{ route('catalog.store') }}" enctype="multipart/form-data">
             @csrf
             <label>Имя</label>
             <input type="text" name="name" placeholder="Введите имя" required>
+
             <label>Описание</label>
             <textarea name="description" placeholder="Введите описание" required></textarea>
+
             <label>Категория</label>
             <select name="category" required>
                 <option value="" disabled selected>Выберите категорию</option>
@@ -104,8 +111,13 @@
                 <option value="Украшения и декор">Украшения и декор</option>
                 <option value="Свадебные кольца">Свадебные кольца</option>
             </select>
+
             <label>Цена</label>
             <input type="number" name="price" placeholder="Введите цену, ₽" required min="0">
+
+            <label>Фото товара</label>
+            <input type="file" name="image" accept="image/*" required>
+
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
                 <button type="button" class="cancel-btn btn" id="closeAddModalBtn">Отмена</button>
@@ -118,14 +130,18 @@
 <div class="modal" id="editCatalogModal">
     <div class="modal-content">
         <h2>Редактировать товар</h2>
-        <form method="POST" id="editCatalogForm" class="catalog-form">
+        <form method="POST" id="editCatalogForm" class="catalog-form" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+
             <input type="hidden" name="product_catalog_id" id="edit_product_catalog_id">
+
             <label>Имя</label>
-            <input type="text" name="name" id="edit_name" placeholder="Введите имя" required>
+            <input type="text" name="name" id="edit_name" required>
+
             <label>Описание</label>
-            <textarea name="description" id="edit_description" placeholder="Введите описание" required></textarea>
+            <textarea name="description" id="edit_description" required></textarea>
+
             <label>Категория</label>
             <select name="category" id="edit_category" required>
                 <option value="" disabled>Выберите категорию</option>
@@ -135,13 +151,31 @@
                 <option value="Украшения и декор">Украшения и декор</option>
                 <option value="Свадебные кольца">Свадебные кольца</option>
             </select>
+
             <label>Цена</label>
-            <input type="number" name="price" id="edit_price" placeholder="Введите цену, ₽" required min="0">
+            <input type="number" name="price" id="edit_price" required min="0">
+
+            <label>Фото товара</label>
+            <input type="file" name="image" accept="image/*">
+
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
                 <button type="button" class="cancel-btn btn" id="closeEditModalBtn">Отмена</button>
             </div>
         </form>
+    </div>
+</div>
+
+<div class="modal" id="detailsModal">
+    <div class="modal-content" style>
+        <h2 id="details_name"></h2>
+        <img id="details_image" src="" alt="Фото товара">
+        <p><strong>Описание:</strong> <span id="details_description"></span></p>
+        <p><strong>Категория:</strong> <span id="details_category"></span></p>
+        <p><strong>Цена:</strong> <span id="details_price"></span></p>
+        <div class="form-buttons">
+            <button type="button" class="cancel-btn btn" id="closeDetailsModalBtn">Закрыть</button>
+        </div>
     </div>
 </div>
 
@@ -173,6 +207,25 @@
 
     closeEditBtn.addEventListener('click', () => editModal.classList.remove('show'));
     window.addEventListener('click', e => { if (e.target === editModal) editModal.classList.remove('show'); });
+
+    // Модалка "Подробнее"
+    const detailsModal = document.getElementById('detailsModal');
+    const closeDetailsBtn = document.getElementById('closeDetailsModalBtn');
+
+    document.querySelectorAll('.admin-details-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.getElementById('details_name').textContent = btn.dataset.name;
+            document.getElementById('details_description').textContent = btn.dataset.description;
+            document.getElementById('details_category').textContent = btn.dataset.category;
+            document.getElementById('details_price').textContent = btn.dataset.price;
+            document.getElementById('details_image').src = btn.dataset.image;
+            detailsModal.classList.add('show');
+        });
+    });
+
+    closeDetailsBtn.addEventListener('click', () => detailsModal.classList.remove('show'));
+    window.addEventListener('click', e => { if (e.target === detailsModal) detailsModal.classList.remove('show'); });
 </script>
+
 </body>
 </html>

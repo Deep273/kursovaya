@@ -104,42 +104,30 @@ header {
 }
 
 .header-bottom {
-    /* max-width: 1330px; */
     gap: 4em;
     padding: 37px 0;
 }
 
 .burger-menu {
     display: none;
-    /* Скрываем бургер-меню по умолчанию */
     cursor: pointer;
 }
 
 .line {
     width: 19px;
-    /* Ширина полосок */
     height: 1.6px;
-    /* Высота полосок */
     background-color: #009CDF;
-    /* Цвет полосок */
     margin: 2.8px 0;
-    /* Отступ между полосками */
     transition: all 0.3s ease;
-    /* Плавный переход для анимации */
 }
 
-/* Выпадающее меню */
 .dropdown-menu {
     display: none;
-    /* Скрываем выпадающее меню по умолчанию */
     flex-direction: column;
     background-color: black;
     position: absolute;
-    /* Позиционируем меню над другими элементами */
     top: 75%;
-    /* Сразу под шапкой */
     right: 0;
-    /* Занимает правую сторону */
     border: 1px solid white;
     width: 150px;
     height: 205px;
@@ -179,12 +167,9 @@ header {
 .welcome>div>h1 {
     max-width: 655px;
     background: linear-gradient(to bottom, #025D85 0%, #009CDF 100%);
-    /* Линейный градиент */
     -webkit-text-fill-color: transparent;
-    /* Прозрачный цвет текста для WebKit-браузеров */
     background-clip: text;
-    /* Обрезка фона по тексту для других браузеров */
-}
+    }
 
 .welcome>div>p {
     max-width: 520px;
@@ -201,9 +186,7 @@ header {
     width: 100%;
     height: 611px;
     background-repeat: no-repeat;
-    /* Не повторять изображение */
     background-size: contain;
-    /* Изображение полностью помещается в блок */
 }
 
 .wedding-planning-inside__container {
@@ -835,7 +818,6 @@ footer>p,
     background-position: right;
 }
 
-/* Третий div в родителе это первый review */
 .reviews>.review:nth-child(4) {
     padding-top: 450px;
 }
@@ -865,8 +847,6 @@ footer>p,
     box-shadow: 50px 50px 0px rgba(217, 217, 217, 0.1);
 }
 
-
-/* чипи чипи чапа чапа */
 .review-text h2 {
     text-shadow: 10px 10px 0px rgb(0 0 0),
     9px 9px 0 rgb(255 255 255),
@@ -952,6 +932,7 @@ footer>p,
     height: 44px;
     position: absolute;
     bottom: 0;
+    cursor: pointer;
 }
 
 
@@ -979,7 +960,8 @@ footer>p,
 .user-menu {
     display: none;
     position: absolute;
-    background-color: #09003E;
+    background-color: black;
+    border: 1px solid white;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 1;

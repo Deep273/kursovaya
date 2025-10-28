@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
                 'Организация',
                 'Фотограф и фотозоны'
             ]);
+            $table->text('image');
             $table->decimal('price', 10, 2);
             $table->timestamps();
         });
