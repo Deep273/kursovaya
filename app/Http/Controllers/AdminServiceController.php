@@ -32,7 +32,7 @@ class AdminServiceController extends Controller
             'name' => 'required|string|max:100',
             'category' => 'required|string|in:Кейтеринг,Церемонии,Стилисты и Визажисты,Организация,Фотограф и фотозоны',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|max:2048', // проверка изображения
+            'image' => 'nullable|image|max:2048',
         ]);
 
         // Загрузка фото

@@ -8,11 +8,10 @@ class User extends Authenticatable
     protected $primaryKey = 'user_id';
     protected $fillable = ['name', 'email', 'number_phone', 'password', 'role', 'avatar'];
 
-    public function weddingProjects()
+    public function weddingProject()
     {
-        return $this->hasMany(WeddingProject::class, 'fk_user_id', 'user_id');
+        return $this->hasOne(WeddingProject::class, 'fk_user_id', 'user_id');
     }
-
     public function feedbacks()
     {
         return $this->hasMany(Feedback::class, 'fk_user_id', 'user_id');

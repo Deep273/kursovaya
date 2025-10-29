@@ -556,6 +556,7 @@ footer>p,
     padding-bottom: 280px;
 }
 
+
 .services-block {
     display: grid;
     grid-template-columns: 22% 78%;
@@ -613,6 +614,12 @@ footer>p,
     height: 228px;
     grid-template-columns: 34% 66%;
 }
+
+.services-block-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block; }
+
 
 .expectations {
     width: 100%;

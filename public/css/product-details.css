@@ -71,3 +71,23 @@
     gap: 30px;
     margin-top: 10px;
 }
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: black;
+    border: solid 1px;
+    color: white;
+}
+
+.alert-info {
+    background-color: black;
+    border: solid 1px;
+    color: white;
+}

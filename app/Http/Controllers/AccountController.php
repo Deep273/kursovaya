@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\WeddingProject;
 use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
 {
-    // Главная страница личного кабинета
     public function index()
     {
         $user = Auth::user();
-        return view('site.account', compact('user'));
+        $userProject = $user->weddingProject; // вместо where()
+        return view('site.account', compact('user', 'userProject'));
     }
 
-    // Редактирование профиля
+
     public function profile()
     {
         $user = Auth::user();
@@ -35,7 +36,7 @@ class AccountController extends Controller
 
         if ($request->hasFile('avatar')) {
             if ($user->avatar) {
-                \Storage::disk('public')->delete($user->avatar);
+                Storage::disk('public')->delete($user->avatar);
             }
             $path = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $path;
@@ -45,6 +46,4 @@ class AccountController extends Controller
 
         return redirect()->route('account')->with('success', 'Профиль обновлён!');
     }
-
 }
-

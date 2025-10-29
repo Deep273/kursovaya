@@ -25,6 +25,9 @@
         <p>+7 952 884-26-95</p>
 
         @if(Auth::check())
+            <div class="product-buttons">
+                <img src="{{ asset('img/shopping-cart-products.svg') }}" alt="Корзина" class="cart-icon">
+            </div>
             <div class="user-dropdown">
                 <div class="nav-avatar">
                     <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/default-avatar.png') }}"
@@ -57,8 +60,14 @@
 
 <section class="account">
     <h2>Личный кабинет</h2>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-    {{-- Профиль --}}
+    @if(session('info'))
+        <div class="alert alert-info">{{ session('info') }}</div>
+    @endif
+
     <div class="account-block">
         <h3>Профиль</h3>
         <div class="profile-info">
@@ -71,25 +80,45 @@
         </div>
     </div>
 
-    {{-- Свадебные проекты / корзина --}}
     <div class="account-block">
-        <h3>Мои свадебные проекты</h3>
-        @if(isset($userProjects) && count($userProjects) > 0)
-            <ul class="projects-list">
-                @foreach($userProjects as $project)
-                    <li>
-                        <strong>{{ $project->title }}</strong> — {{ $project->status }}
-                        <a href="{{ route('project.show', $project->id) }}"><button>Открыть</button></a>
-                    </li>
-                @endforeach
-            </ul>
+        <h3>Мой свадебный проект</h3>
+
+        @if(session('success'))
+            <div class="alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if($userProject)
+            <p><strong>Дата свадьбы:</strong> {{ \Carbon\Carbon::parse($userProject->date)->format('d.m.Y H:i') }}</p>
+            <p><strong>Стоимость:</strong> {{ $userProject->price }} ₽</p>
+            <a href="{{ route('project.show', $userProject->wedding_project_id) }}">
+                <button id="myProjectBtn">Мой проект</button>
+            </a>
         @else
-            <p>У вас пока нет свадебных проектов.</p>
-            <a href="{{ route('catalog') }}"><button>Добавить проект</button></a>
+            <p>У вас пока нет свадебного проекта.</p>
+            <button id="createProjectBtn">Создать проект</button>
         @endif
     </div>
 
-    {{-- Избранные фото --}}
+    <div id="createProjectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Создать свадебный проект</h3>
+            <form action="{{ route('project.store') }}" method="POST">
+                @csrf
+
+                <label for="date">Дата свадьбы:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Время свадьбы:</label>
+                <input type="time" id="time" name="time">
+
+                <button type="submit" class="submit-btn">Создать</button>
+            </form>
+        </div>
+    </div>
+
+
+
     <div class="account-block">
         <h3>Избранные фото</h3>
         @if(isset($favoritePhotos) && count($favoritePhotos) > 0)
@@ -106,7 +135,6 @@
         @endif
     </div>
 
-    {{-- Настройки --}}
     <div class="account-block">
         <h3>Настройки</h3>
         <p>Управляйте уведомлениями и персональными данными.</p>
@@ -143,5 +171,31 @@
         <p class="u-bold">tebe_chego@inbox.ru</p>
     </div>
 </footer>
+
+<script>
+    const modal = document.getElementById("createProjectModal");
+    const btn = document.getElementById("createProjectBtn");
+    const closeBtn = document.querySelector(".close");
+
+    if (btn) {
+        btn.onclick = function() {
+            modal.style.display = "flex";
+        }
+    }
+
+    if (closeBtn) {
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
 </body>
 </html>

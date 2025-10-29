@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class WeddingProject extends Model
 {
+    protected $table = 'wedding_project';
     protected $primaryKey = 'wedding_project_id';
     protected $fillable = ['date', 'price', 'fk_user_id'];
 

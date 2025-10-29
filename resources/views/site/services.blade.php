@@ -72,13 +72,15 @@
 <section class="services">
     <h2>Услуги</h2>
     <div class="services-blocks d-f s-b f-w">
-        <div class="services-block">
-            <div class="services-block-border">
-                <p>Кейтеринг</p>
+            <div class="services-block">
+                <div class="services-block-border">
+                    <p>
+                        <a href="{{ route('services.catering') }}" class="services-link">Кейтеринг</a>
+                    </p>
+                </div>
+                <div class="services-block-border">
+                </div>
             </div>
-            <div class="services-block-border">
-            </div>
-        </div>
         <div class="services-block">
             <div class="services-block-border">
                 <p>Церемонии</p>

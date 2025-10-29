@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мужская одежда</title>
+    <title>Кейтеринг</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mens_clothing.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/catering_services.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -37,7 +37,6 @@
                 @endif
             </div>
         </div>
-
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="burger-menu f-d_c">
             <span class="line"></span>
@@ -68,23 +67,19 @@
     </div>
 </header>
 
+<main class="services-page container">
+    <h2 class="page-title">Кейтеринг</h2>
 
-<main class="catalog-page container">
-    <h2 class="page-title">Мужская одежда</h2>
-
-    <div class="product-grid">
-        @forelse($products as $product)
-            <div class="product-card" style="background-image: url('{{ asset('img/background.svg') }}');">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                <h3>{{ $product->name }}</h3>
-                <p class="price">{{ number_format($product->price, 0, ',', ' ') }} ₽</p>
-
-                <button class="more-btn">
-                    <a href="{{ route('product_details.index', $product->product_catalog_id) }}" class="u-bold">Подробнее</a>
-                </button>
+    <div class="services-grid">
+        @forelse($services as $service)
+            <div class="service-card" style="background-image: url('{{ asset('img/background.svg') }}');">
+                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+                <h3>{{ $service->name }}</h3>
+                <p class="price">{{ number_format($service->price, 0, ',', ' ') }} ₽</p>
+                <a href="{{ route('service_details.index', $service->service_id) }}" class="more-btn u-bold">Подробнее</a>
             </div>
         @empty
-            <p>Товары в этой категории пока отсутствуют.</p>
+            <p>Услуги в этой категории пока отсутствуют.</p>
         @endforelse
     </div>
 </main>
@@ -102,21 +97,18 @@
             <a href="#">Контакты</a>
         </div>
         <p class="footer-hiden">
-            Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им
-            незабываемые впечатления.
+            Наш свадебный портал призван облегчить жизнь будущим молодоженам, подарив им незабываемые впечатления.
         </p>
         <button class="u-bold">Связаться</button>
     </div>
     <p class="container">
-        Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им
-        незабываемые впечатления.
+        Наш свадебный портал призван облегчить жизнь будущим молодоженам, подарив им незабываемые впечатления.
     </p>
     <div class="footer-bottom container u-bold d-f s-b a-i_c">
-        <p class="u-bold">&copy;2024 Все права защищены</p>
+        <p class="u-bold">&copy;2025 Все права защищены</p>
         <p class="u-bold">+7 952 884-26-95</p>
         <p class="u-bold">tebe_chego@inbox.ru</p>
     </div>
 </footer>
-
 </body>
 </html>

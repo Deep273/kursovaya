@@ -70,13 +70,25 @@
         <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image-big">
     </div>
     <div class="product-detail-info">
+        @if(session('success'))
+            <div class="alert alert-success" id="flash-message">{{ session('success') }}</div>
+        @endif
+
+        @if(session('info'))
+            <div class="alert alert-info" id="flash-message">{{ session('info') }}</div>
+        @endif
+
         <h1 class="product-title">{{ $product->name }}</h1>
         <p class="product-desc">{{ $product->description }}</p>
         <div class="product-price">{{ number_format($product->price, 0, ',', ' ') }} ₽</div>
         <div class="product-buttons">
-            <button class="add-cart-btn">Добавить в корзину</button>
-            <img src="{{ asset('img/shopping-cart-products.svg') }}" alt="Корзина" class="cart-icon">
+            <form action="{{ route('project.addProduct') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->product_catalog_id }}">
+                <button type="submit" class="add-cart-btn">Добавить в свадебный проект</button>
+            </form>
         </div>
+
     </div>
 </div>
 

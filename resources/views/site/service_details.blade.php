@@ -2,14 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мужская одежда</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>{{ $service->name }}</title>
+    <link rel="stylesheet" href="{{ asset('css/product-details.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mens_clothing.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
 <header class="d-f f-d_c">
     <div class="header-top d-f s-b a-i_c">
         <div class="block-social d-f">
@@ -37,28 +36,7 @@
                 @endif
             </div>
         </div>
-
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="burger-menu f-d_c">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
-        </label>
-        <nav class="dropdown-menu">
-            <div class="dropdown-links d-f f-d_c">
-                <a href="{{ route('portfolio') }}">Портфолио</a>
-                <a href="{{ route('services') }}">Услуги</a>
-                <a href="{{ route('catalog') }}">Каталог</a>
-                <a href="{{ route('reviews') }}">Отзывы</a>
-                <a href="#">Контакты</a>
-            </div>
-            <div class="dropdown-contact d-f f-d_c">
-                <p>tebe_chego@inbox.ru</p>
-                <p>+7 952 884-26-95</p>
-            </div>
-        </nav>
     </div>
-
     <div class="header-bottom d-f j-c_c">
         <a href="{{ route('portfolio') }}">Портфолио</a>
         <a href="{{ route('services') }}">Услуги</a>
@@ -68,26 +46,32 @@
     </div>
 </header>
 
-
-<main class="catalog-page container">
-    <h2 class="page-title">Мужская одежда</h2>
-
-    <div class="product-grid">
-        @forelse($products as $product)
-            <div class="product-card" style="background-image: url('{{ asset('img/background.svg') }}');">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                <h3>{{ $product->name }}</h3>
-                <p class="price">{{ number_format($product->price, 0, ',', ' ') }} ₽</p>
-
-                <button class="more-btn">
-                    <a href="{{ route('product_details.index', $product->product_catalog_id) }}" class="u-bold">Подробнее</a>
-                </button>
-            </div>
-        @empty
-            <p>Товары в этой категории пока отсутствуют.</p>
-        @endforelse
+<div class="product-detail-container">
+    <div class="product-image-block">
+        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="product-image-big">
     </div>
-</main>
+    <div class="product-detail-info">
+        @if(session('success'))
+            <div class="alert alert-success" id="flash-message">{{ session('success') }}</div>
+        @endif
+
+        @if(session('info'))
+            <div class="alert alert-info" id="flash-message">{{ session('info') }}</div>
+        @endif
+
+        <h1 class="product-title">{{ $service->name }}</h1>
+        <p class="product-desc">{{ $service->description }}</p>
+        <div class="product-price">{{ number_format($service->price, 0, ',', ' ') }} ₽</div>
+
+        <div class="product-buttons">
+            <form action="{{ route('project.addService') }}" method="POST">
+                @csrf
+                <input type="hidden" name="service_id" value="{{ $service-> service_id }}">
+                <button type="submit" class="add-cart-btn">Добавить в свадебный проект</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <footer>
     <div class="footer-top container d-f s-b a-i_c">
@@ -102,21 +86,18 @@
             <a href="#">Контакты</a>
         </div>
         <p class="footer-hiden">
-            Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им
-            незабываемые впечатления.
+            Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им незабываемые впечатления.
         </p>
         <button class="u-bold">Связаться</button>
     </div>
     <p class="container">
-        Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им
-        незабываемые впечатления.
+        Наш свадебный портал призван серьезно облегчить жизнь будущим молодоженам, подарив им незабываемые впечатления.
     </p>
     <div class="footer-bottom container u-bold d-f s-b a-i_c">
-        <p class="u-bold">&copy;2024 Все права защищены</p>
+        <p class="u-bold">&copy;2025 Все права защищены</p>
         <p class="u-bold">+7 952 884-26-95</p>
         <p class="u-bold">tebe_chego@inbox.ru</p>
     </div>
 </footer>
-
 </body>
 </html>

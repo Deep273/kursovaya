@@ -1,6 +1,6 @@
 body {
     background-color: #000;
-    color: white;
+    color: #fff;
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
     padding: 0;
@@ -10,11 +10,11 @@ body {
     font-size: 36px;
     font-weight: 700;
     text-align: center;
-    margin: 40px 0 40px 0;
-    color: white;
+    margin: 40px 0;
+    color: #fff;
 }
 
-.product-grid {
+.services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 30px;
@@ -23,35 +23,39 @@ body {
     margin: 0 auto;
 }
 
-.product-card {
+.service-card {
     position: relative;
     background-color: rgba(10, 10, 10, 0.95);
-    background-size: cover;
-    background-position: center;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 156, 223, 0.4);
     padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
 }
 
-.product-card:hover {
+.service-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 20px rgba(0, 156, 223, 0.7);
     background-color: rgba(0, 0, 0, 0.97);
 }
 
-.product-card img {
+.service-card img {
     border-radius: 10px;
     width: 200px;
-    height: 250px;
+    height: 200px;
     object-fit: cover;
     margin-bottom: 12px;
+    transition: transform 0.3s ease;
 }
 
-.product-card h3 {
+.service-card:hover img {
+    transform: scale(1.05);
+}
+
+.service-card h3 {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 8px;
@@ -67,29 +71,21 @@ body {
     text-align: center;
 }
 
-/*.cart-icon-btn {*/
-/*    position: absolute;*/
-/*    top: 10px;*/
-/*    right: 10px;*/
-/*    background: none;*/
-/*    border: none;*/
-/*    cursor: pointer;*/
-/*    padding: 0;*/
-/*}*/
-
-/*.cart-icon-btn img {*/
-/*    filter: invert(100%) brightness(1.2);*/
-/*    transition: filter 0.3s ease;*/
-/*}*/
-
-/*.cart-icon-btn:hover img {*/
-/*    filter: invert(60%) brightness(1.5);*/
-/*}*/
-
 .more-btn {
     background: none;
     border: 1px solid #009cdf;
-    color: white;
+    color: #fff;
     border-radius: 20px;
     padding: 8px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
+
+.more-btn:hover {
+    background-color: #009cdf;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 156, 223, 0.5);
+}
+
