@@ -31,38 +31,75 @@ class AdminCatalogController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
             'description' => 'required|string',
             'category' => 'required|string|max:100',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // проверка файла
+            'price' => 'required|min:0|max:99999999.99',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048', // не более 2MB
+        ], [
+            'name.required' => 'Введите название товара.',
+            'name.max' => 'Название не должно превышать 50 символов.',
+            'description.required' => 'Введите описание товара.',
+            'category.required' => 'Выберите категорию.',
+            'price.required' => 'Введите цену.',
+            'price.min' => 'Цена не может быть меньше 0 ₽.',
+            'price.max' => 'Цена не может превышать 99 999 999,99 ₽.',
+            'image.required' => 'Обложка товара обязательна.',
+            'image.image' => 'Файл должен быть изображением.',
+            'image.mimes' => 'Разрешены только форматы jpg, jpeg, png, webp.',
+            'image.max' => 'Размер изображения не должен превышать 2MB.',
         ]);
 
-        // Если есть загруженное фото — сохраняем
+        $validated['price'] = (float) $validated['price'];
+        if ($validated['price'] > 99999999.99) {
+            return redirect()->back()
+                ->withErrors(['price' => 'Цена не может превышать 99 999 999,99 ₽.'])
+                ->withInput();
+        }
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('catalog_images', 'public');
             $validated['image'] = $path;
         }
+
 
         ProductCatalog::create($validated);
 
         return redirect()->route('admin_catalog')->with('success', 'Товар успешно добавлен!');
     }
 
-    // Обновление товара
+// Обновление товара
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
             'description' => 'required|string',
             'category' => 'required|string|max:100',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|min:0|max:99999999.99',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'name.required' => 'Введите название товара.',
+            'name.max' => 'Название не должно превышать 50 символов.',
+            'description.required' => 'Введите описание товара.',
+            'category.required' => 'Выберите категорию.',
+            'price.required' => 'Введите цену.',
+            'price.min' => 'Цена не может быть меньше 0 ₽.',
+            'price.max' => 'Цена не может превышать 99 999 999,99 ₽.',
+
+            'image.image' => 'Файл должен быть изображением.',
+            'image.mimes' => 'Разрешены только форматы jpg, jpeg, png, webp.',
+            'image.max' => 'Размер изображения не должен превышать 2MB.',
         ]);
 
         $product = ProductCatalog::findOrFail($id);
 
-        // Если пользователь загрузил новое фото — заменяем
+        $validated['price'] = (float) $validated['price'];
+        if ($validated['price'] > 99999999.99) {
+            return redirect()->back()
+                ->withErrors(['price' => 'Цена не может превышать 99 999 999,99 ₽.'])
+                ->withInput();
+        }
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('catalog_images', 'public');
             $validated['image'] = $path;
@@ -72,6 +109,7 @@ class AdminCatalogController extends Controller
 
         return redirect()->route('admin_catalog')->with('success', 'Товар успешно обновлён!');
     }
+
 
     // Удаление
     public function destroy($id)

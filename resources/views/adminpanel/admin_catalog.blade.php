@@ -96,27 +96,43 @@
         <h2>Добавить товар</h2>
         <form class="catalog-form" method="POST" action="{{ route('catalog.store') }}" enctype="multipart/form-data">
             @csrf
+
             <label>Имя</label>
-            <input type="text" name="name" placeholder="Введите имя" required>
+            <input type="text" name="name" placeholder="Введите имя" value="{{ old('name') }}" required>
+            @error('name')
+            <span class="error">{{ $message }}</span>
+            @enderror
 
             <label>Описание</label>
-            <textarea name="description" placeholder="Введите описание" required></textarea>
+            <textarea name="description" placeholder="Введите описание" required>{{ old('description') }}</textarea>
+            @error('description')
+            <span class="error">{{ $message }}</span>
+            @enderror
 
             <label>Категория</label>
             <select name="category" required>
-                <option value="" disabled selected>Выберите категорию</option>
-                <option value="Мужская одежда">Мужская одежда</option>
-                <option value="Свадебные платья">Свадебные платья</option>
-                <option value="Аксессуары">Аксессуары</option>
-                <option value="Украшения и декор">Украшения и декор</option>
-                <option value="Свадебные кольца">Свадебные кольца</option>
+                <option value="" disabled {{ old('category') ? '' : 'selected' }}>Выберите категорию</option>
+                <option value="Мужская одежда" {{ old('category') == 'Мужская одежда' ? 'selected' : '' }}>Мужская одежда</option>
+                <option value="Свадебные платья" {{ old('category') == 'Свадебные платья' ? 'selected' : '' }}>Свадебные платья</option>
+                <option value="Аксессуары" {{ old('category') == 'Аксессуары' ? 'selected' : '' }}>Аксессуары</option>
+                <option value="Украшения и декор" {{ old('category') == 'Украшения и декор' ? 'selected' : '' }}>Украшения и декор</option>
+                <option value="Свадебные кольца" {{ old('category') == 'Свадебные кольца' ? 'selected' : '' }}>Свадебные кольца</option>
             </select>
+            @error('category')
+            <span class="error">{{ $message }}</span>
+            @enderror
 
             <label>Цена</label>
-            <input type="number" name="price" placeholder="Введите цену, ₽" required min="0">
+            <input type="number" name="price" placeholder="Введите цену, ₽" value="{{ old('price') }}" required min="0">
+            @error('price')
+            <span class="error">{{ $message }}</span>
+            @enderror
 
             <label>Фото товара</label>
-            <input type="file" name="image" accept="image/*" required>
+            <input type="file" name="image" accept="image/*">
+            @error('image')
+            <span class="error">{{ $message }}</span>
+            @enderror
 
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
@@ -156,7 +172,7 @@
             <input type="number" name="price" id="edit_price" required min="0">
 
             <label>Фото товара</label>
-            <input type="file" name="image" accept="image/*">
+            <input type="file" name="image" accept="image/*" required>
 
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
@@ -224,7 +240,12 @@
     });
 
     closeDetailsBtn.addEventListener('click', () => detailsModal.classList.remove('show'));
-    window.addEventListener('click', e => { if (e.target === detailsModal) detailsModal.classList.remove('show'); });
+    window.addEventListener('DOMContentLoaded', () => {
+        @if ($errors->any())
+        document.getElementById('addCatalogModal').classList.add('show');
+        @endif
+    });
+
 </script>
 
 </body>

@@ -18,6 +18,22 @@ class AuthController extends Controller
     // Обработка входа
     public function login(Request $request)
     {
+        $ip = $request->ip();
+        $attemptKey = 'login_attempts_' . $ip;
+        $timeKey = 'login_blocked_until_' . $ip;
+
+        if (session()->has($timeKey)) {
+            $blockedUntil = session($timeKey);
+            if (time() < $blockedUntil) {
+                $seconds = $blockedUntil - time();
+                return back()->withErrors([
+                    'throttle' => "Слишком много попыток входа. Пожалуйста, попробуйте через $seconds секунд."
+                ])->withInput($request->only('login'));
+            } else {
+                session()->forget([$attemptKey, $timeKey]);
+            }
+        }
+
         $credentials = $request->validate([
             'contact' => 'required|string',
             'password' => 'required|string',
@@ -31,12 +47,12 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
-            // 🔹 Проверяем роль и перенаправляем
+            // Проверяем роль и перенаправляем
             if ($user->role === 'admin') {
                 return redirect()->route('admin_services');
             }
 
-            // 🔹 Если обычный пользователь
+            // Если обычный пользователь
             return redirect()->route('main');
         }
 

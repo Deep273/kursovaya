@@ -99,7 +99,7 @@
         @endif
     </div>
 
-    <div id="createProjectModal" class="modal">
+    <div id="createProjectModal" class="modal @if($errors->any()) open @endif">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>Создать свадебный проект</h3>
@@ -107,15 +107,19 @@
                 @csrf
 
                 <label for="date">Дата свадьбы:</label>
-                <input type="date" id="date" name="date" required>
+                <input type="date" id="date" name="date" value="{{ old('date') }}" required>
+                @error('date')
+                <p class="error">{{ $message }}</p>
+                @enderror
 
                 <label for="time">Время свадьбы:</label>
-                <input type="time" id="time" name="time">
+                <input type="time" id="time" name="time" value="{{ old('time') }}">
 
                 <button type="submit" class="submit-btn">Создать</button>
             </form>
         </div>
     </div>
+
 
 
 
@@ -195,7 +199,5 @@
         }
     }
 </script>
-
-
 </body>
 </html>

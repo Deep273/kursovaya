@@ -10,18 +10,35 @@ class WeddingProjectController extends Controller
 {
     public function store(Request $request)
     {
+        // Базовая валидация
         $request->validate([
-            'date' => 'required|date',
+            'date' => ['required', 'date', 'after:today'],
             'time' => 'nullable',
+        ], [
+            'date.required' => 'Выберите дату свадьбы.',
+            'date.date' => 'Некорректная дата.',
+            'date.after' => 'Вы не можете выбрать сегодняшнюю или прошедшую дату.',
         ]);
+
+        // Проверка на слишком большой год
+        $year = date('Y', strtotime($request->date));
+        if ($year > 2100) {
+            return redirect()->back()
+                ->withErrors(['date' => 'Год выбранной даты слишком большой.'])
+                ->withInput();
+        }
 
         $userId = Auth::id();
 
-        // Проверяем, есть ли уже проект у пользователя
-        $existing = WeddingProject::where('fk_user_id', $userId)->first();
+        // Проверка, что у пользователя нет проекта на эту дату
+        $existing = WeddingProject::where('fk_user_id', $userId)
+            ->whereDate('date', $request->date)
+            ->first();
+
         if ($existing) {
-            return redirect()->route('project.show', $existing->wedding_project_id)
-                ->with('info', 'У вас уже есть проект.');
+            return redirect()->back()
+                ->withErrors(['date' => 'У вас уже есть свадебный проект на эту дату.'])
+                ->withInput();
         }
 
         $project = new WeddingProject();

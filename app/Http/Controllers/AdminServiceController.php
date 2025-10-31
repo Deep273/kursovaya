@@ -9,14 +9,12 @@ class AdminServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $query = \App\Models\Service::query();
+        $query = Service::query();
 
-        // Поиск по названию
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        // 🏷Фильтр по категории
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
@@ -30,16 +28,32 @@ class AdminServiceController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'category' => 'required|string|in:Кейтеринг,Церемонии,Стилисты и Визажисты,Организация,Фотограф и фотозоны',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|max:2048',
+            'category' => 'required|string',
+            'price' => 'required|min:0|max:99999999.99',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'name.required' => 'Введите название услуги.',
+            'name.max' => 'Название не может превышать 100 символов.',
+            'category.required' => 'Выберите категорию услуги.',
+            'price.required' => 'Введите цену услуги.',
+            'price.min' => 'Цена не может быть меньше 0 ₽.',
+            'price.max' => 'Цена не может превышать 99 999 999,99 ₽.',
+            'image.required' => 'Обложка услуги обязательна.',
+            'image.image' => 'Файл должен быть изображением.',
+            'image.mimes' => 'Допустимые форматы: jpg, jpeg, png, webp.',
+            'image.max' => 'Размер изображения не должен превышать 2MB.',
         ]);
 
-        // Загрузка фото
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('service_images', 'public');
-            $validated['image'] = $path;
+        $validated['price'] = (float) $validated['price'];
+        if ($validated['price'] > 99999999.99) {
+            return redirect()->back()
+                ->withErrors(['price' => 'Цена не может превышать 99 999 999,99 ₽.'])
+                ->withInput();
         }
+
+        // Сохраняем файл
+        $path = $request->file('image')->store('service_images', 'public');
+        $validated['image'] = $path;
 
         Service::create($validated);
 
@@ -50,14 +64,30 @@ class AdminServiceController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'category' => 'required|string|in:Кейтеринг,Церемонии,Стилисты и Визажисты,Организация,Фотограф и фотозоны',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|max:2048',
+            'category' => 'required|string',
+            'price' => 'required|min:0|max:99999999.99',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // при обновлении можно не менять
+        ], [
+            'name.required' => 'Введите название услуги.',
+            'name.max' => 'Название не может превышать 100 символов.',
+            'category.required' => 'Выберите категорию услуги.',
+            'price.required' => 'Введите цену услуги.',
+            'price.min' => 'Цена не может быть меньше 0 ₽.',
+            'price.max' => 'Цена не может превышать 99 999 999,99 ₽.',
+            'image.image' => 'Файл должен быть изображением.',
+            'image.mimes' => 'Допустимые форматы: jpg, jpeg, png, webp.',
+            'image.max' => 'Размер изображения не должен превышать 2MB.',
         ]);
 
         $service = Service::findOrFail($id);
 
-        // Обновляем фото, если загружено новое
+        $validated['price'] = (float) $validated['price'];
+        if ($validated['price'] > 99999999.99) {
+            return redirect()->back()
+                ->withErrors(['price' => 'Цена не может превышать 99 999 999,99 ₽.'])
+                ->withInput();
+        }
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('service_images', 'public');
             $validated['image'] = $path;
@@ -73,6 +103,6 @@ class AdminServiceController extends Controller
         $service = Service::findOrFail($id);
         $service->delete();
 
-        return redirect()->route('admin_services')->with('success', 'Услуга удалена.');
+        return redirect()->route('admin_services')->with('success', 'Услуга успешно удалена.');
     }
 }

@@ -98,30 +98,33 @@
     </main>
 </div>
 
-<!-- Модалка добавления -->
 <div class="modal" id="addServiceModal">
     <div class="modal-content">
         <h2>Добавить услугу</h2>
         <form class="service-form" method="POST" action="{{ route('services.store') }}" enctype="multipart/form-data">
             @csrf
             <label>Название услуги</label>
-            <input type="text" name="name" placeholder="Введите название" required>
+            <input type="text" name="name" placeholder="Введите название" required value="{{ old('name') }}">
+            @error('name') <p class="error-message">{{ $message }}</p> @enderror
 
             <label>Категория</label>
             <select name="category" required>
-                <option value="" disabled selected>Выберите категорию</option>
-                <option value="Кейтеринг">Кейтеринг</option>
-                <option value="Церемонии">Церемонии</option>
-                <option value="Стилисты и Визажисты">Стилисты и Визажисты</option>
-                <option value="Организация">Организация</option>
-                <option value="Фотограф и фотозоны">Фотограф и фотозоны</option>
+                <option value="" disabled {{ old('category') ? '' : 'selected' }}>Выберите категорию</option>
+                <option value="Кейтеринг" {{ old('category') == 'Кейтеринг' ? 'selected' : '' }}>Кейтеринг</option>
+                <option value="Церемонии" {{ old('category') == 'Церемонии' ? 'selected' : '' }}>Церемонии</option>
+                <option value="Стилисты и Визажисты" {{ old('category') == 'Стилисты и Визажисты' ? 'selected' : '' }}>Стилисты и Визажисты</option>
+                <option value="Организация" {{ old('category') == 'Организация' ? 'selected' : '' }}>Организация</option>
+                <option value="Фотограф и фотозоны" {{ old('category') == 'Фотограф и фотозоны' ? 'selected' : '' }}>Фотограф и фотозоны</option>
             </select>
+            @error('category') <p class="error-message">{{ $message }}</p> @enderror
 
             <label>Цена</label>
-            <input type="number" name="price" placeholder="Введите цену, ₽" required min="0">
+            <input type="number" name="price" placeholder="Введите цену, ₽" required min="0" value="{{ old('price') }}">
+            @error('price') <p class="error-message">{{ $message }}</p> @enderror
 
             <label>Фото услуги</label>
-            <input type="file" name="image" accept="image/*">
+            <input type="file" name="image" accept="image/*" required>
+            @error('image') <p class="error-message">{{ $message }}</p> @enderror
 
             <div class="form-buttons">
                 <button type="submit" class="save-btn btn">Сохранить</button>
@@ -130,6 +133,7 @@
         </form>
     </div>
 </div>
+
 
 <!-- Модалка "Подробнее" -->
 <div class="modal" id="detailsModal">
@@ -171,7 +175,11 @@
     });
 
     closeDetailsBtn.addEventListener('click', () => detailsModal.classList.remove('show'));
-    window.addEventListener('click', e => { if (e.target === detailsModal) detailsModal.classList.remove('show'); });
+    window.addEventListener('DOMContentLoaded', () => {
+        @if ($errors->any())
+        document.getElementById('addServiceModal').classList.add('show');
+        @endif
+    });
 </script>
 </body>
 </html>

@@ -22,11 +22,12 @@ Route::view('/catalog', 'site.catalog')->name('catalog');
 
 // Аутентификация
 Route::get('/auth', fn() => view('site.auth'))->name('auth');
-Route::post('/auth', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/auth', [AuthController::class, 'login'])->name('auth.login')->middleware('throttle:5,1'); // 5 попыток в 1 минуту
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', fn() => view('site.register'))->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.submit')->middleware('throttle:5,1'); // 5 регистраций в 1 минуту
 
 // Каталог товаров
 Route::get('/catalog/mens', [CatalogController::class, 'mens'])->name('mens_clothing.mens');
@@ -47,14 +48,14 @@ Route::middleware('auth')->prefix('account')->group(function () {
 
 // Свадебный проект
 Route::middleware('auth')->prefix('project')->group(function () {
-    Route::post('/', [WeddingProjectController::class, 'store'])->name('project.store');
+    Route::post('/', [WeddingProjectController::class, 'store'])->name('project.store')->middleware('throttle:10,1');
     Route::get('/{id}', [WeddingProjectController::class, 'show'])->name('project.show');
-    Route::post('/add-product', [WeddingProjectController::class, 'addProduct'])->name('project.addProduct');
-    Route::post('/add-service', [WeddingProjectController::class, 'addService'])->name('project.addService');
+    Route::post('/add-product', [WeddingProjectController::class, 'addProduct'])->name('project.addProduct')->middleware('throttle:10,1');
+    Route::post('/add-service', [WeddingProjectController::class, 'addService'])->name('project.addService')->middleware('throttle:10,1');
 });
 
-// Админ-панель
-Route::middleware('auth')->prefix('adminpanel')->group(function () {
+// Админ-панель — ограничиваем критические операции
+Route::middleware(['auth', 'admin', 'throttle:20,1'])->prefix('adminpanel')->group(function () {
     // Каталог
     Route::get('/catalog', [AdminCatalogController::class, 'index'])->name('admin_catalog');
     Route::post('/catalog', [AdminCatalogController::class, 'store'])->name('catalog.store');
@@ -67,5 +68,3 @@ Route::middleware('auth')->prefix('adminpanel')->group(function () {
     Route::put('/services/{id}', [AdminServiceController::class, 'update'])->name('services.update');
     Route::delete('/services/{id}', [AdminServiceController::class, 'destroy'])->name('services.destroy');
 });
-
-

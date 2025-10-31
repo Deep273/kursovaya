@@ -28,8 +28,14 @@ class AccountController extends Controller
         $user = Auth::user();
 
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'name' => 'required|string|max:255|unique:users,name,' . $user->user_id . ',user_id',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // только картинки, макс. 2 МБ
+        ], [
+            'name.required' => 'Введите имя.',
+            'name.unique' => 'Это имя уже занято другим пользователем.',
+            'avatar.image' => 'Файл должен быть изображением.',
+            'avatar.mimes' => 'Допустимые форматы: jpg, jpeg, png, gif.',
+            'avatar.max' => 'Размер файла не должен превышать 2 МБ.',
         ]);
 
         $user->name = $data['name'];
@@ -46,4 +52,5 @@ class AccountController extends Controller
 
         return redirect()->route('account')->with('success', 'Профиль обновлён!');
     }
+
 }

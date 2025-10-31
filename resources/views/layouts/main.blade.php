@@ -13,6 +13,13 @@
 </head>
 
 <body>
+
+@if(session('error'))
+    <div class="alert alert-error">
+        {{ session('error') }}
+    </div>
+@endif
+
 <header class="d-f f-d_c">
     <div class="header-top d-f s-b a-i_c">
         <div class="block-social d-f">
