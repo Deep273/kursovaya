@@ -121,12 +121,6 @@ body {
     font-size: 17px;
     font-weight: 700;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.save-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 20px rgba(95, 61, 255, 0.7);
 }
 
 .error {

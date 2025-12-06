@@ -9,7 +9,7 @@ class AdminServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Service::query();
+        $query = Service::query()->where('archived', false); // сразу исключаем архивированные
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
@@ -101,8 +101,9 @@ class AdminServiceController extends Controller
     public function destroy($id)
     {
         $service = Service::findOrFail($id);
-        $service->delete();
+        $service->archived = true;
+        $service->save();
 
-        return redirect()->route('admin_services')->with('success', 'Услуга успешно удалена.');
+        return redirect()->route('admin_services')->with('success', 'Услуга успешно архивирована.');
     }
 }

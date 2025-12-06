@@ -25,9 +25,6 @@
         <p>+7 952 884-26-95</p>
 
         @if(Auth::check())
-            <div class="product-buttons">
-                <img src="{{ asset('img/shopping-cart-products.svg') }}" alt="Корзина" class="cart-icon">
-            </div>
             <div class="user-dropdown">
                 <div class="nav-avatar">
                     <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/default-avatar.png') }}"
@@ -60,9 +57,6 @@
 
 <section class="account">
     <h2>Личный кабинет</h2>
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
 
     @if(session('info'))
         <div class="alert alert-info">{{ session('info') }}</div>
@@ -71,6 +65,10 @@
     <div class="account-block">
         <h3>Профиль</h3>
         <div class="profile-info">
+            @if(session('success'))
+                <div class="alert-success">{{ session('account_success') }}</div>
+            @endif
+
             <div class="profile-avatar">
                 <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/default-avatar.png') }}" alt="avatar" class="user-avatar-large">
             </div>
@@ -95,12 +93,12 @@
             </a>
         @else
             <p>У вас пока нет свадебного проекта.</p>
-            <button id="createProjectBtn">Создать проект</button>
+            <button id="createProjectBtn" type="button">Создать проект</button>
         @endif
     </div>
 
-    <div id="createProjectModal" class="modal @if($errors->any()) open @endif">
-        <div class="modal-content">
+    <div id="createProjectModal" class="modal @if($errors->project->any()) open @endif">
+    <div class="modal-content">
             <span class="close">&times;</span>
             <h3>Создать свадебный проект</h3>
             <form action="{{ route('project.store') }}" method="POST">
@@ -125,19 +123,78 @@
 
     <div class="account-block">
         <h3>Избранные фото</h3>
-        @if(isset($favoritePhotos) && count($favoritePhotos) > 0)
+
+        {{-- Сообщения --}}
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if(session('info'))
+            <div class="alert alert-info">{{ session('info') }}</div>
+        @endif
+
+        {{-- Форма отправки заявки --}}
+        <div class="favorite-add-form">
+            <h4>Добавить новое избранное фото</h4>
+            <form action="{{ route('favorite.add') }}" method="POST" class="fav-form" enctype="multipart/form-data">
+                @csrf
+                <div class="custom-file-input-wrapper">
+                    <input type="file" name="photo" id="photoInput" accept="image/*">
+                    <label for="photoInput" class="custom-file-label">Выберите файл</label>
+                </div>
+
+                {{-- Ошибка --}}
+                @error('photo')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
+                {{-- Сообщение об успехе --}}
+                @if(session('favorite_success'))
+                    <div class="alert alert-success">{{ session('favorite_success') }}</div>
+                @endif
+
+                <button type="submit">Отправить заявку</button>
+            </form>
+        </div>
+
+
+
+
+        {{-- Одобренные фото --}}
+        <h4 class="fav-title">Одобренные фото</h4>
+
+        @if($favoriteApproved->count() > 0)
             <div class="favorite-photos d-f f-w">
-                @foreach($favoritePhotos as $photo)
+                @foreach($favoriteApproved as $photo)
                     <div class="photo-card">
-                        <img src="{{ asset('storage/' . $photo->path) }}" alt="photo">
-                        <p>{{ $photo->title }}</p>
+                        <img src="{{ asset('storage/' . $photo->link) }}" alt="photo">
+                        <p>Одобрено</p>
                     </div>
                 @endforeach
             </div>
         @else
-            <p>Вы ещё не добавили избранные фото.</p>
+            <p class="fav-empty">Пока нет одобренных фото.</p>
         @endif
+
+
+        {{-- Ожидающие одобрения --}}
+        <h4 class="fav-title">Заявки в обработке</h4>
+
+        @if($favoritePending->count() > 0)
+            <div class="favorite-photos d-f f-w">
+                @foreach($favoritePending as $photo)
+                    <div class="photo-card pending">
+                        <img src="{{ asset('storage/' . $photo->link) }}" alt="photo">
+                        <p>Ожидает подтверждения администратора</p>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="fav-empty">Нет заявок в ожидании.</p>
+        @endif
+
     </div>
+
 
     <div class="account-block">
         <h3>Настройки</h3>
@@ -176,28 +233,7 @@
     </div>
 </footer>
 
-<script>
-    const modal = document.getElementById("createProjectModal");
-    const btn = document.getElementById("createProjectBtn");
-    const closeBtn = document.querySelector(".close");
-
-    if (btn) {
-        btn.onclick = function() {
-            modal.style.display = "flex";
-        }
-    }
-
-    if (closeBtn) {
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-    }
-
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
+    <script src="{{ asset('js/account.js') }}"></script>
 </body>
 </html>
+

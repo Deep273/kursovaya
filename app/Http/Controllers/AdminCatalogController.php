@@ -10,14 +10,12 @@ class AdminCatalogController extends Controller
     // Страница каталога
     public function index(Request $request)
     {
-        $query = ProductCatalog::query();
+        $query = ProductCatalog::where('archived', false);
 
-        // Фильтрация по названию
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        // Фильтрация по категории
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
@@ -26,6 +24,7 @@ class AdminCatalogController extends Controller
 
         return view('adminpanel.admin_catalog', compact('products'));
     }
+
 
     // Добавление товара
     public function store(Request $request)
@@ -115,8 +114,9 @@ class AdminCatalogController extends Controller
     public function destroy($id)
     {
         $product = ProductCatalog::findOrFail($id);
-        $product->delete();
+        $product->archived = true;
+        $product->save();
 
-        return redirect()->route('admin_catalog')->with('success', 'Товар успешно удалён!');
+        return redirect()->route('admin_catalog')->with('success', 'Товар успешно отправлен в архив!');
     }
 }

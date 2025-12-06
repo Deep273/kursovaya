@@ -7,18 +7,24 @@ use App\Http\Controllers\AdminCatalogController;
 use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProductDetailsController;
-use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\ProductCatalogController;
 use App\Http\Controllers\WeddingProjectController;
-use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceDetailsController;
+use App\Http\Controllers\AdminFavoritePhotoController;
+use App\Http\Controllers\FeedbackController;
 
 // Публичные страницы
 Route::view('/', 'welcome');
 Route::view('/main', 'layouts.main')->name('main');
 Route::view('/portfolio', 'site.portfolio')->name('portfolio');
-Route::view('/reviews', 'site.reviews')->name('reviews');
+Route::get('/reviews', [FeedbackController::class, 'index'])->name('reviews');
 Route::view('/services', 'site.services')->name('services');
 Route::view('/catalog', 'site.catalog')->name('catalog');
+
+Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
 
 // Аутентификация
 Route::get('/auth', fn() => view('site.auth'))->name('auth');
@@ -30,11 +36,11 @@ Route::get('/register', fn() => view('site.register'))->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit')->middleware('throttle:5,1'); // 5 регистраций в 1 минуту
 
 // Каталог товаров
-Route::get('/catalog/mens', [CatalogController::class, 'mens'])->name('mens_clothing.mens');
+Route::get('/catalog/{category}', [ProductCatalogController::class, 'category'])->name('catalog.category');
 Route::get('/product/{id}', [ProductDetailsController::class, 'index'])->name('product_details.index');
 
 // Услуги
-Route::get('/services/catering', [ServicesController::class, 'catering'])->name('services.catering');
+Route::get('/services/{category}', [ServiceController::class, 'category'])->name('services.category');
 Route::get('/service/{id}', [ServiceDetailsController::class, 'index'])->name('service_details.index');
 
 // Личный кабинет
@@ -44,6 +50,8 @@ Route::middleware('auth')->prefix('account')->group(function () {
     Route::post('/profile', [AccountController::class, 'updateProfile'])->name('account.profile.update');
     Route::get('/orders', [AccountController::class, 'orders'])->name('account.orders');
     Route::get('/settings', [AccountController::class, 'settings'])->name('account.settings');
+    Route::post('/favorite/add', [AccountController::class, 'addFavorite'])->name('favorite.add');
+
 });
 
 // Свадебный проект
@@ -67,4 +75,12 @@ Route::middleware(['auth', 'admin', 'throttle:20,1'])->prefix('adminpanel')->gro
     Route::post('/services/store', [AdminServiceController::class, 'store'])->name('services.store');
     Route::put('/services/{id}', [AdminServiceController::class, 'update'])->name('services.update');
     Route::delete('/services/{id}', [AdminServiceController::class, 'destroy'])->name('services.destroy');
+
+    //Заявки
+    Route::get('favorite-photos', [AdminFavoritePhotoController::class, 'index'])->name('admin_favorite_photos');
+    Route::post('favorite-photos/{id}/approve', [AdminFavoritePhotoController::class, 'approve'])->name('admin_favorite_photos.approve');
+
+    Route::delete('favorite-photos/{id}', [AdminFavoritePhotoController::class, 'destroy'])->name('admin_favorite_photos.destroy');
 });
+
+

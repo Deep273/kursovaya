@@ -46,7 +46,6 @@
             <span class="line"></span>
             <span class="line"></span>
         </label>
-        <!-- Выпадающее меню -->
         <nav class="dropdown-menu">
             <div class="dropdown-links d-f f-d_c">
                 <a href="{{ route('portfolio') }}">Портфолио</a>
@@ -75,7 +74,7 @@
             <div class="services-block">
                 <div class="services-block-border">
                     <p>
-                        <a href="{{ route('services.catering') }}" class="services-link">Кейтеринг</a>
+                        <a href="{{ route('services.category', 'catering') }}" class="services-link">Кейтеринг</a>
                     </p>
                 </div>
                 <div class="services-block-border">
@@ -83,28 +82,36 @@
             </div>
         <div class="services-block">
             <div class="services-block-border">
-                <p>Церемонии</p>
+                <p>
+                    <a href="{{ route('services.category', 'ceremony') }}" class="services-link">Церемонии</a>
+                </p>
             </div>
             <div class="services-block-border">
             </div>
         </div>
         <div class="services-block">
             <div class="services-block-border">
-                <p>Костюмы</p>
+                <p>
+                    <a href="{{ route('services.category', 'stylists') }}" class="services-link">Стилисты и визажисты</a>
+                </p>
             </div>
             <div class="services-block-border">
             </div>
         </div>
         <div class="services-block">
             <div class="services-block-border">
-                <p>Организация</p>
+                <p>
+                    <a href="{{ route('services.category', 'organisation') }}" class="services-link">Организация</a>
+                </p>
             </div>
             <div class="services-block-border">
             </div>
         </div>
         <div class="services-block">
             <div class="services-block-border">
-                <p>Фотограф и видеограф. Тематические фотозоны</p>
+                <p>
+                    <a href="{{ route('services.category', 'photo') }}" class="services-link">Фотограф и фотозоны</a>
+                </p>
             </div>
             <div class="services-block-border">
             </div>

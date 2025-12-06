@@ -21,6 +21,7 @@ class CreateProductCatalogTable extends Migration
             ]);
             $table->decimal('price', 10, 2);
             $table->text('image');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }

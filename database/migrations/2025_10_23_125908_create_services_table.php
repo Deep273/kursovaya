@@ -20,6 +20,7 @@ class CreateServicesTable extends Migration
             ]);
             $table->text('image');
             $table->decimal('price', 10, 2);
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }

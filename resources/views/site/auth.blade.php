@@ -14,10 +14,9 @@
     <section class="auth">
         <div class="close-button d-f">
             <a href="{{ route('main') }}">
-                <img src="img/close-page-auth.png" alt="close-page-auth">
+                <img src="{{ asset('img/close-page-auth.png') }}" alt="close-page-auth">
             </a>
         </div>
-
         <div class="auth-block">
             <p>Вход</p>
 

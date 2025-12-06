@@ -68,7 +68,8 @@
 </header>
 
 <main class="services-page container">
-    <h2 class="page-title">Кейтеринг</h2>
+
+    <h2 class="page-title">{{ $title }}</h2>
 
     <div class="services-grid">
         @forelse($services as $service)

@@ -140,6 +140,59 @@
         </div>
     </div>
 </section>
+
+@auth
+    <section class="review-form-block d-f f-d_c a-i_c">
+        <h2 class="u-bold">Оставить отзыв</h2>
+
+        <form action="{{ route('feedback.store') }}" method="POST" enctype="multipart/form-data" class="review-form d-f f-d_c">
+            @csrf
+
+            <div class="review-form-user d-f a-i_c">
+                <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('img/default-avatar.png') }}"
+                     class="review-avatar">
+                <p class="u-bold">{{ Auth::user()->name }}</p>
+            </div>
+
+            <label class="u-bold">Ваша оценка:</label>
+            <div class="stars">
+                @for ($i = 5; $i >= 1; $i--)
+                    <input type="radio" id="star{{ $i }}" name="estimation" value="{{ $i }}">
+                    <label for="star{{ $i }}">★</label>
+                @endfor
+            </div>
+
+            <textarea name="text" placeholder="Ваш отзыв..." required></textarea>
+
+            <button type="submit" class="u-bold">Отправить отзыв</button>
+        </form>
+    </section>
+@endauth
+
+@foreach ($feedback as $item)
+    <div class="review d-f">
+        <div class="review-photo">
+            <img src="{{ $item->user->avatar ? asset('storage/' . $item->user->avatar) : asset('img/default-avatar.png') }}"
+                 class="review-user-avatar">
+        </div>
+
+        <div class="review-text">
+            <h2>{{ $item->user->name }}</h2>
+
+            <div class="review-rating">
+                @for ($i = 1; $i <= 5; $i++)
+                    <span class="star {{ $i <= $item->estimation ? 'active' : '' }}">★</span>
+                @endfor
+            </div>
+
+            <p>{{ $item->text }}</p>
+            <p>{{ \Carbon\Carbon::parse($item->date)->format('d.m.Y') }}</p>
+        </div>
+    </div>
+@endforeach
+
+
+
 <footer>
     <div class="footer-top container d-f s-b a-i_c">
         <a href="{{ route('main') }}">

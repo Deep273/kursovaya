@@ -75,16 +75,16 @@
     <div class="portfolio-block container">
         <div class="portfolio-block__photos d-f">
             <div>
-                <img src="img/portfolio-alice.svg" alt="Алиса">
+                <img src="{{ asset('img/portfolio-alice.svg') }}" alt="Алиса">
             </div>
             <div class="d-f f-w">
                 <div class="d-f">
-                    <div><img src="img/portfolio-sofa.svg" alt="Оформление дивана"></div>
-                    <div><img src="img/portfolio-alice-table-decoration.svg" alt="Сервировка стола Алисы"></div>
+                    <div><img src="{{ asset('img/portfolio-sofa.svg') }}" alt="Оформление дивана"></div>
+                    <div><img src="{{ asset('img/portfolio-alice-table-decoration.svg') }}" alt="Сервировка стола Алисы"></div>
                 </div>
                 <div class="d-f">
-                    <div><img src="img/portfolio-alice-flavour.svg" alt="Букет Алисы"></div>
-                    <div><img src="img/portfolio-accessories.svg" alt="Свадебные аксессуары"></div>
+                    <div><img src="{{ asset('img/portfolio-alice-flavour.svg') }}" alt="Букет Алисы"></div>
+                    <div><img src="{{ asset('img/portfolio-accessories.svg') }}" alt="Свадебные аксессуары"></div>
                 </div>
             </div>
         </div>
@@ -97,16 +97,16 @@
     <div class="portfolio-block container">
         <div class="portfolio-block__photos d-f">
             <div>
-                <img src="img/portfolio-seva.svg" alt="Сева">
+                <img src="{{ asset('img/portfolio-seva.svg') }}" alt="Сева">
             </div>
             <div class="d-f f-w">
                 <div class="d-f">
-                    <div><img src="img/portfolio-seva-and-julia.svg" alt="Сева и Юля"></div>
-                    <div><img src="img/portfolio-julia-flavour.svg" alt="Букет Юли"></div>
+                    <div><img src="{{ asset('img/portfolio-seva-and-julia.svg') }}" alt="Сева и Юля"></div>
+                    <div><img src="{{ asset('img/portfolio-julia-flavour.svg') }}" alt="Букет Юли"></div>
                 </div>
                 <div class="d-f">
-                    <div><img src="img/portfolio-invitation-letters.svg" alt="Пригласительные письма"></div>
-                    <div><img src="img/portfolio-julia-table-decoration.svg" alt="Сервировка стола Юли"></div>
+                    <div><img src="{{ asset('img/portfolio-invitation-letters.svg') }}" alt="Пригласительные письма"></div>
+                    <div><img src="{{ asset('img/portfolio-julia-table-decoration.svg') }}" alt="Сервировка стола Юли"></div>
                 </div>
             </div>
         </div>
@@ -119,16 +119,16 @@
     <div class="portfolio-block container">
         <div class="portfolio-block__photos d-f">
             <div>
-                <img src="img/portfolio-cris-ivan.svg" alt="Кристина и Иван">
+                <img src="{{ asset('img/portfolio-cris-ivan.svg') }}" alt="Кристина и Иван">
             </div>
             <div class="d-f f-w">
                 <div class="d-f">
-                    <div><img src="img/portfolio-floristry.svg" alt="Флористика"></div>
-                    <div><img src="img/portfolio-cristina.svg" alt="Кристина"></div>
+                    <div><img src="{{ asset('img/portfolio-floristry.svg') }}" alt="Флористика"></div>
+                    <div><img src="{{ asset('img/portfolio-cristina.svg') }}" alt="Кристина"></div>
                 </div>
                 <div class="d-f">
-                    <div><img src="img/portfolio-cris-flavour.svg" alt="Букет Кристины"></div>
-                    <div><img src="img/portfolio-cris-table-decoration.svg" alt="Сервировка стола Кристины"></div>
+                    <div><img src="{{ asset('img/portfolio-cris-flavour.svg') }}" alt="Букет Кристины"></div>
+                    <div><img src="{{ asset('img/portfolio-cris-table-decoration.svg') }}" alt="Сервировка стола Кристины"></div>
                 </div>
             </div>
         </div>
@@ -139,6 +139,11 @@
         </div>
     </div>
 </section>
+
+
+
+
+
 <section class="portfolio-mob">
     <h2>Портфолио</h2>
     <div class="portfolio-block container">

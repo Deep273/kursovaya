@@ -46,7 +46,6 @@
             <span class="line"></span>
             <span class="line"></span>
         </label>
-        <!-- Выпадающее меню -->
         <nav class="dropdown-menu">
             <div class="dropdown-links d-f f-d_c">
                 <a href="{{ route('portfolio') }}">Портфолио</a>
@@ -79,9 +78,9 @@
                 <p>ЭЛЕГАНТНОСТЬ — именно это слово олицетворяет нашу новую коллекцию! Строгость, утонченность,
                     уверенность и стиль — каждый элемент создан для того, чтобы подчеркнуть индивидуальность
                     мужчины.</p>
-                <a href="{{ route('mens_clothing.mens') }}"><button>Подробнее</button></a>
+                <a href="{{ route('catalog.category', 'mens_clothing') }}"><button>Подробнее</button></a>
             </div>
-            <img src="img/catalog-man-clothes.svg" alt="catalog-man-clothes">
+            <img src="{{ asset('img/catalog-man-clothes.svg') }}" alt="catalog-man-clothes">
         </div>
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">02</p>
@@ -89,9 +88,9 @@
                 <h3>Свадебные платья</h3>
                 <p>РОСКОШНОЕ именно с этим словом ассоциируются платья нашей новой линии... Изящество, легкость,
                     красота и стиль! Тот момент, когда все сложилось идеально!</p>
-                <a href="#"><button>Подробнее</button></a>
+                <a href="{{ route('catalog.category', 'wedding_dresses') }}"><button>Подробнее</button></a>
             </div>
-            <img src="img/catalog-wedding-dresses.svg" alt="catalog-wedding-dresses">
+            <img src= "{{ asset('img/catalog-wedding-dresses.svg') }}" alt="catalog-wedding-dresses">
         </div>
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">03</p>
@@ -99,9 +98,9 @@
                 <h3>Аксессуары</h3>
                 <p>Аксессуары в готическом стиле — это уникальные детали, которые придадут вашему
                     образу таинственность и элегантную мрачность.</p>
-                <a href="#"><button>Подробнее</button></a>
+                <a href="{{ route('catalog.category', 'accessories') }}"><button>Подробнее</button></a>
             </div>
-            <img src="img/catalog-accessories.svg" alt="catalog-accessories">
+            <img src= "{{ asset('img/catalog-accessories.svg') }}" alt="catalog-accessories">
         </div>
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">04</p>
@@ -109,9 +108,9 @@
                 <h3>Украшения и декор</h3>
                 <p>Каждое украшение и элемент декора создаются с учётом вашей индивидуальности и стилистики готической свадьбы, чтобы
                     подчеркнуть неповторимость вашего образа и добавить особую атмосферу таинственности и изящества этому важному дню.</p>
-                <a href="#"><button>Подробнее</button></a>
+                <a href="{{ route('catalog.category', 'decor') }}"><button>Подробнее</button></a>
             </div>
-            <img src="img/catalog-decorations-and-decor.svg" alt="catalog-decorations-and-decor">
+            <img src= "{{ asset('img/catalog-decorations-and-decor.svg') }}" alt="catalog-decorations-and-decor">
         </div>
         <div class="catalog-blocks__block">
             <p class="u-bold d-f a-i_c">05</p>
@@ -120,9 +119,9 @@
                 <p> Каждое изделие воплощает в себе уникальность, элегантность и символику вечной любви. Наши
                     мастера-ювелиры, обладая богатым опытом и тонким вкусом, создают не просто украшения, а
                     настоящие произведения искусства.</p>
-                <a href="#"><button>Подробнее</button></a>
+                <a href="{{ route('catalog.category', 'rings') }}"><button>Подробнее</button></a>
             </div>
-            <img src="img/catalog-wedding-rings.svg" alt="catalog-wedding-rings">
+            <img src="{{ asset('img/catalog-wedding-rings.svg') }}" alt="catalog-wedding-rings">
         </div>
     </div>
 </section>
@@ -156,5 +155,4 @@
     </div>
 </footer>
 </body>
-
 </html>

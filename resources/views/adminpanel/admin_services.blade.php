@@ -17,7 +17,7 @@
             <nav class="admin-menu">
                 <a href="#" class="active">Услуги</a>
                 <a href="{{ route('admin_catalog') }}">Каталог</a>
-                <a href="#">Настройки</a>
+                <a href="{{ route('admin_favorite_photos') }}">Заявки</a>
                 <a href="#">Отчёты</a>
             </nav>
         </div>
@@ -85,11 +85,10 @@
                             Редактировать
                         </button>
 
-                        <!-- Кнопка "Удалить" -->
-                        <form method="POST" action="{{ route('services.destroy', $service->service_id) }}" onsubmit="return confirm('Удалить эту услугу?');">
+                        <form method="POST" action="{{ route('services.destroy', $service->service_id) }}" onsubmit="return confirm('Вы уверены, что хотите архивировать эту услугу?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="admin-delete-btn btn">Удалить</button>
+                            <button type="submit" class="admin-delete-btn btn">Архивировать</button>
                         </form>
                     </div>
                 </div>
@@ -134,6 +133,43 @@
     </div>
 </div>
 
+<!-- Модалка редактирования услуги -->
+<div class="modal" id="editServiceModal">
+    <div class="modal-content">
+        <h2>Редактировать услугу</h2>
+        <form method="POST" id="editServiceForm" class="service-form" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <input type="hidden" name="service_id" id="edit_service_id">
+
+            <label>Название услуги</label>
+            <input type="text" name="name" id="edit_name" required>
+
+            <label>Категория</label>
+            <select name="category" id="edit_category" required>
+                <option value="" disabled>Выберите категорию</option>
+                <option value="Кейтеринг">Кейтеринг</option>
+                <option value="Церемонии">Церемонии</option>
+                <option value="Стилисты и Визажисты">Стилисты и Визажисты</option>
+                <option value="Организация">Организация</option>
+                <option value="Фотограф и фотозоны">Фотограф и фотозоны</option>
+            </select>
+
+            <label>Цена</label>
+            <input type="number" name="price" id="edit_price" required min="0">
+
+            <label>Фото услуги</label>
+            <input type="file" name="image" accept="image/*">
+
+            <div class="form-buttons">
+                <button type="submit" class="save-btn btn">Сохранить</button>
+                <button type="button" class="cancel-btn btn" id="closeEditModalBtn">Отмена</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 <!-- Модалка "Подробнее" -->
 <div class="modal" id="detailsModal">
@@ -152,34 +188,9 @@
 </div>
 
 <script>
-    // === Модалка добавления ===
-    const addModal = document.getElementById('addServiceModal');
-    const openAddBtn = document.getElementById('openAddModalBtn');
-    const closeAddBtn = document.getElementById('closeAddModalBtn');
-    openAddBtn.addEventListener('click', () => addModal.classList.add('show'));
-    closeAddBtn.addEventListener('click', () => addModal.classList.remove('show'));
-    window.addEventListener('click', e => { if (e.target === addModal) addModal.classList.remove('show'); });
-
-    // === Модалка "Подробнее" ===
-    const detailsModal = document.getElementById('detailsModal');
-    const closeDetailsBtn = document.getElementById('closeDetailsModalBtn');
-
-    document.querySelectorAll('.admin-details-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.getElementById('details_name').textContent = btn.dataset.name;
-            document.getElementById('details_category').textContent = btn.dataset.category;
-            document.getElementById('details_price').textContent = btn.dataset.price;
-            document.getElementById('details_image').src = btn.dataset.image;
-            detailsModal.classList.add('show');
-        });
-    });
-
-    closeDetailsBtn.addEventListener('click', () => detailsModal.classList.remove('show'));
-    window.addEventListener('DOMContentLoaded', () => {
-        @if ($errors->any())
-        document.getElementById('addServiceModal').classList.add('show');
-        @endif
-    });
+    window.OPEN_ADD_SERVICE_MODAL = @json($errors->any());
 </script>
+<script src="{{ asset('js/services_admin.js') }}"></script>
+
 </body>
 </html>

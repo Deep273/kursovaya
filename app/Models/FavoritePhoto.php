@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FavoritePhoto extends Model
 {
     protected $primaryKey = 'favorite_photo_id';
+
     protected $fillable = ['link', 'fk_user_id', 'status'];
 
     public function user()

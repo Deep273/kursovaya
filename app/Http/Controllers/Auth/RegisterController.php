@@ -31,8 +31,8 @@ class RegisterController extends Controller
                 'required',
                 'confirmed',
                 'min:6',
-                'max:8',
-                'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,8}$/',
+                'max:50',
+                'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,50}$/',
             ],
         ], [
             'name.required' => 'Введите имя.',
@@ -44,7 +44,7 @@ class RegisterController extends Controller
             'number_phone.unique' => 'Такой номер уже зарегистрирован.',
             'password.required' => 'Введите пароль.',
             'password.min' => 'Пароль должен содержать минимум 6 символов.',
-            'password.max' => 'Пароль не должен превышать 8 символов.',
+            'password.max' => 'Пароль не должен превышать 50 символов.',
             'password.regex' => 'Пароль должен содержать буквы и цифры.',
             'password.confirmed' => 'Пароли не совпадают.',
         ]);

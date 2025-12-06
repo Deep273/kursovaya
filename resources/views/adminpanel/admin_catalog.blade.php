@@ -16,8 +16,8 @@
             <h2 class="admin-logo">Admin<span>Panel</span></h2>
             <nav class="admin-menu">
                 <a href="{{ route('admin_services') }}">Услуги</a>
-                <a href="#" class="active">Каталог</a>
-                <a href="#">Настройки</a>
+                <a href="{{ route('admin_catalog') }}">Каталог</a>
+                <a href="{{ route('admin_favorite_photos') }}">Заявки</a>
                 <a href="#">Отчёты</a>
             </nav>
         </div>
@@ -75,11 +75,11 @@
                             Редактировать
                         </button>
 
-                        <!-- Кнопка "Удалить" -->
-                        <form method="POST" action="{{ route('catalog.destroy', $product->product_catalog_id) }}" onsubmit="return confirm('Вы уверены, что хотите удалить этот товар?');">
+                        <!-- Кнопка "Архивировать" -->
+                        <form method="POST" action="{{ route('catalog.destroy', $product->product_catalog_id) }}" onsubmit="return confirm('Вы уверены, что хотите архивировать этот товар?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="admin-delete-btn btn">Удалить</button>
+                            <button type="submit" class="admin-delete-btn btn">Архивировать</button>
                         </form>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
         <form class="catalog-form" method="POST" action="{{ route('catalog.store') }}" enctype="multipart/form-data">
             @csrf
 
-            <label>Имя</label>
+            <label>Название</label>
             <input type="text" name="name" placeholder="Введите имя" value="{{ old('name') }}" required>
             @error('name')
             <span class="error">{{ $message }}</span>
@@ -196,57 +196,10 @@
 </div>
 
 <script>
-    // Модалка добавления
-    const addModal = document.getElementById('addCatalogModal');
-    const openAddBtn = document.getElementById('openAddModalBtn');
-    const closeAddBtn = document.getElementById('closeAddModalBtn');
-    openAddBtn.addEventListener('click', () => addModal.classList.add('show'));
-    closeAddBtn.addEventListener('click', () => addModal.classList.remove('show'));
-    window.addEventListener('click', e => { if (e.target === addModal) addModal.classList.remove('show'); });
-
-    // Модалка редактирования
-    const editModal = document.getElementById('editCatalogModal');
-    const editForm = document.getElementById('editCatalogForm');
-    const closeEditBtn = document.getElementById('closeEditModalBtn');
-
-    document.querySelectorAll('.admin-edit-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            editForm.action = btn.dataset.route;
-            document.getElementById('edit_product_catalog_id').value = btn.dataset.id;
-            document.getElementById('edit_name').value = btn.dataset.name;
-            document.getElementById('edit_description').value = btn.dataset.description;
-            document.getElementById('edit_category').value = btn.dataset.category;
-            document.getElementById('edit_price').value = btn.dataset.price;
-            editModal.classList.add('show');
-        });
-    });
-
-    closeEditBtn.addEventListener('click', () => editModal.classList.remove('show'));
-    window.addEventListener('click', e => { if (e.target === editModal) editModal.classList.remove('show'); });
-
-    // Модалка "Подробнее"
-    const detailsModal = document.getElementById('detailsModal');
-    const closeDetailsBtn = document.getElementById('closeDetailsModalBtn');
-
-    document.querySelectorAll('.admin-details-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.getElementById('details_name').textContent = btn.dataset.name;
-            document.getElementById('details_description').textContent = btn.dataset.description;
-            document.getElementById('details_category').textContent = btn.dataset.category;
-            document.getElementById('details_price').textContent = btn.dataset.price;
-            document.getElementById('details_image').src = btn.dataset.image;
-            detailsModal.classList.add('show');
-        });
-    });
-
-    closeDetailsBtn.addEventListener('click', () => detailsModal.classList.remove('show'));
-    window.addEventListener('DOMContentLoaded', () => {
-        @if ($errors->any())
-        document.getElementById('addCatalogModal').classList.add('show');
-        @endif
-    });
-
+    window.OPEN_ADD_MODAL_ERRORS = @json($errors->any());
 </script>
+
+<script src="{{ asset('js/catalog_admin.js') }}"></script>
 
 </body>
 </html>

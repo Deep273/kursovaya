@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FavoritePhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WeddingProject;
@@ -9,11 +10,29 @@ use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
-        $userProject = $user->weddingProject; // вместо where()
-        return view('site.account', compact('user', 'userProject'));
+   public function index()
+   {
+       $user = Auth::user();
+
+       // Свадебный проект пользователя
+       $userProject = $user->weddingProject; // связь hasOne в модели User
+
+       // Избранные фото
+       $favoritePhotosAll = FavoritePhoto::where('fk_user_id', $user->user_id)->get();
+       $favoriteApproved = FavoritePhoto::where('fk_user_id', $user->user_id)
+           ->where('status', true)
+           ->get();
+       $favoritePending = FavoritePhoto::where('fk_user_id', $user->user_id)
+           ->where('status', false)
+           ->get();
+
+       return view('site.account', compact(
+           'user',
+           'userProject',
+           'favoritePhotosAll',
+           'favoriteApproved',
+           'favoritePending'
+       ));
     }
 
 
@@ -50,7 +69,32 @@ class AccountController extends Controller
 
         $user->save();
 
-        return redirect()->route('account')->with('success', 'Профиль обновлён!');
+        return redirect()->route('account')->with('account_success', 'Профиль обновлён!');
+    }
+
+    public function addFavorite(Request $request)
+    {
+        $request->validate([
+            'photo' => 'required|image|mimes:jpg,jpeg,png,gif|max:5120', // до 5 МБ
+        ], [
+            'photo.required' => 'Выберите фото для загрузки.',
+            'photo.image' => 'Файл должен быть изображением.',
+            'photo.mimes' => 'Допустимые форматы: jpg, jpeg, png, gif.',
+            'photo.max' => 'Максимальный размер файла — 5 МБ.',
+        ]);
+
+        $userId = Auth::user()->user_id;
+
+        // Загрузка файла
+        $path = $request->file('photo')->store('favorite_photos', 'public');
+
+        FavoritePhoto::create([
+            'fk_user_id' => $userId,
+            'link' => $path,   // сохраняем путь к файлу в поле "link"
+            'status' => false, // ожидает проверки
+        ]);
+
+        return back()->with('favorite_success', 'Фото отправлено на проверку!');
     }
 
 }

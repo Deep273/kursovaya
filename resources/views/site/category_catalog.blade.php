@@ -70,7 +70,7 @@
 
 
 <main class="catalog-page container">
-    <h2 class="page-title">Мужская одежда</h2>
+    <h2 class="page-title">{{ $title }}</h2>
 
     <div class="product-grid">
         @forelse($products as $product)
